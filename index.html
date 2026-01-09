@@ -74,8 +74,30 @@
         
         .tech-title { color: var(--dark-bg); font-size: 2rem; margin-bottom: 30px; border-left: 5px solid var(--brand); padding-left: 20px; }
         
+        /* ESTILO INTRODUÇÃO */
+        .intro-quote {
+            font-size: 1.4rem; font-family: 'Playfair Display', serif; color: var(--brand); 
+            font-style: italic; text-align: center; margin-bottom: 30px; line-height: 1.4;
+        }
+
+        /* ESTILO NOSSO DNA (DARK) */
+        .dna-section {
+            background: #111; /* Fundo escuro conforme imagem */
+            color: white; padding: 50px; border-radius: 8px; margin-bottom: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        .dna-title { font-size: 2.5rem; color: white; margin-bottom: 40px; text-transform: uppercase; font-weight: 800; border-left: none; }
+        .dna-grid { display: grid; grid-template-columns: 1fr; gap: 30px; }
+        .dna-item { display: flex; gap: 20px; align-items: flex-start; }
+        .dna-number {
+            background: white; color: black; font-weight: 900; font-size: 1.5rem;
+            padding: 10px 15px; border-radius: 4px; min-width: 60px; text-align: center;
+        }
+        .dna-content h4 { font-size: 1.2rem; color: white; margin-bottom: 10px; font-weight: 700; text-transform: uppercase; }
+        .dna-content p { color: #ccc; font-size: 0.95rem; line-height: 1.6; }
+
+        /* CONCEITOS */
         .concept-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 30px; }
-        
         .concept-card { background: #f8fafc; padding: 30px; border-radius: 8px; border: 1px solid #e2e8f0; }
         .concept-card h3 { color: var(--brand); margin-bottom: 15px; font-size: 1.4rem; display: flex; align-items: center; gap: 10px; }
         .concept-card p { font-size: 0.95rem; color: #475569; text-align: justify; }
@@ -152,7 +174,7 @@
             .concept-grid, .calendar-grid { grid-template-columns: 1fr; }
             header h1 { font-size: 2.2rem; }
             .content-container { padding: 0 15px; margin-top: -50px; }
-            .technical-section { padding: 30px 20px; }
+            .technical-section, .dna-section { padding: 30px 20px; }
         }
         @media print {
             #lock-screen, .btn-brand, .cta-buttons { display: none !important; }
@@ -161,6 +183,7 @@
             #result-area { display: block !important; background: white !important; color: black !important; }
             .score-circle { border-color: black; color: black; }
             .diagnosis-text { background: #eee; color: black; }
+            .dna-section { background: #111 !important; color: white !important; -webkit-print-color-adjust: exact; }
             footer { display: block !important; border-top: 1px solid black; }
         }
     </style>
@@ -189,8 +212,58 @@
         <div class="content-container">
 
             <section class="technical-section">
+                <h2 class="tech-title">INTRODUÇÃO</h2>
+                
+                <p class="intro-quote">"Empresas são feitas de processos, mas movidas por pessoas."</p>
+                
+                <p>Essa frase sintetiza a essência da Crescenza e também a essência do endomarketing: colocar o ser humano no centro das estratégias, sem abrir mão da clareza, da estrutura e da ética.</p>
+                
+                <p>O mundo organizacional mudou. O que antes se resumia a cumprir normas e seguir rotinas, hoje exige propósito, engajamento e conexão genuína. Processos bem estruturados são indispensáveis, mas sem pessoas engajadas, nenhum resultado é sustentável.</p>
+                
+                <p>É nesse ponto de encontro, entre processos e pessoas, entre estrutura e cultura, que o endomarketing se torna essencial. Não como um modismo, nem como um conjunto de ações superficiais, mas como uma estratégia fundamentada em marketing interno, conceito trabalhado por autores como Saul Bekin no Brasil e Rafiq & Ahmed no cenário internacional.</p>
+                
+                <p>O endomarketing, quando bem aplicado, transforma a comunicação em engajamento, a informação em pertencimento e o trabalho em significado. Ele conecta a missão da empresa ao dia a dia do colaborador, fazendo com que cada pessoa se reconheça como parte fundamental da organização.</p>
+
+                <p>Este material foi criado com um compromisso: oferecer conteúdo ético, aplicável e robusto para pequenas, médias e grandes empresas.</p>
+            </section>
+
+            <section class="dna-section">
+                <h2 class="dna-title">NOSSO DNA</h2>
+                <div class="dna-grid">
+                    <div class="dna-item">
+                        <div class="dna-number">01</div>
+                        <div class="dna-content">
+                            <h4>Processos Gente & Gestão</h4>
+                            <p>Clareza e documentação, fluxos, compliance e rotinas para dar estrutura sólida ao crescimento.</p>
+                        </div>
+                    </div>
+                    <div class="dna-item">
+                        <div class="dna-number">02</div>
+                        <div class="dna-content">
+                            <h4>Do gratuito ao estratégico</h4>
+                            <p>Oferecemos soluções que vão de materiais práticos e acessíveis até projetos estratégicos de RH.</p>
+                        </div>
+                    </div>
+                    <div class="dna-item">
+                        <div class="dna-number">03</div>
+                        <div class="dna-content">
+                            <h4>Desenvolvimento de pessoas</h4>
+                            <p>Palestras, treinamentos e ações que fortalecem cultura, propósito, engajamento e performance.</p>
+                        </div>
+                    </div>
+                    <div class="dna-item">
+                        <div class="dna-number">04</div>
+                        <div class="dna-content">
+                            <h4>Pessoas e propósito</h4>
+                            <p>Empresas são feitas de processos, mas movidas por pessoas. O crachá organiza, o propósito mobiliza.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="technical-section">
                 <h2 class="tech-title">1. A Ciência da Gestão de Pessoas</h2>
-                <p>No ambiente corporativo moderno, existe uma confusão perigosa entre "avisar os funcionários" e "conquistar os funcionários". Para o sucesso do seu negócio, é vital diferenciar as duas disciplinas, baseando-se em teóricos como <strong>Margarida Kunsch</strong> e <strong>Saul Bekin</strong>.</p>
+                <p>No ambiente corporativo moderno, existe uma confusão perigosa entre "avisar os funcionários" e "conquistar os funcionários". Para o sucesso do seu negócio, é vital diferenciar as duas disciplinas.</p>
 
                 <div class="concept-grid">
                     <div class="concept-card">
@@ -236,9 +309,6 @@
                         </tr>
                     </tbody>
                 </table>
-                <p style="background: var(--brand-light); padding: 15px; border-left: 4px solid var(--brand); font-style: italic;">
-                    "O cliente só vai amar a sua empresa se os seus colaboradores a amarem primeiro." — Simon Sinek
-                </p>
             </section>
 
             <section class="technical-section">
@@ -363,7 +433,8 @@
             <p class="legal">Proibida a reprodução ou comercialização sem autorização prévia.</p>
             <div class="links">
                 <a href="https://www.crescenzaonline.com/" target="_blank">www.crescenzaonline.com</a> |
-                <a href="https://instagram.com/idionaraprass/" target="_blank">@idionaraprass</a>
+                <a href="https://instagram.com/idionaraprass/" target="_blank">@idionaraprass</a> | 
+                <a href="https://instagram.com/crescenzaonline/" target="_blank">@crescenzaonline</a>
             </div>
         </footer>
 
