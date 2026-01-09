@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Masterclass & Diagnóstico | Crescenza Consultoria</title>
+    <title>Diagnóstico Estratégico | Crescenza Consultoria</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,7 +24,7 @@
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Manrope', sans-serif; }
         
-        body { background-color: #f8fafc; color: var(--text-body); line-height: 1.8; }
+        body { background-color: #f8fafc; color: var(--text-body); line-height: 1.8; display: flex; flex-direction: column; min-height: 100vh; }
         
         h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
         strong { color: var(--brand); font-weight: 700; }
@@ -45,27 +45,27 @@
         .lock-input {
             width: 100%; padding: 15px; margin: 30px 0; background: transparent;
             border: none; border-bottom: 2px solid var(--text-light);
-            color: white; text-align: center; font-size: 1.2rem; letter-spacing: 3px;
+            color: white; text-align: center; font-size: 1.1rem; letter-spacing: 2px;
             text-transform: uppercase; transition: 0.3s;
         }
         .lock-input:focus { border-color: var(--brand); outline: none; }
         .btn-brand {
             background: var(--brand); color: white; padding: 15px 40px; border: none;
-            border-radius: 2px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px;
+            border-radius: 4px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px;
             cursor: pointer; transition: 0.3s; width: 100%;
         }
         .btn-brand:hover { background: var(--white); color: var(--brand); }
 
         /* --- HEADER DARK --- */
         header {
-            background: var(--dark-bg); color: var(--white); padding: 100px 20px; text-align: center;
+            background: var(--dark-bg); color: var(--white); padding: 100px 20px 140px; text-align: center;
         }
         header h1 { font-size: 3rem; margin-bottom: 20px; line-height: 1.2; }
         header p { color: var(--text-light); font-size: 1.2rem; max-width: 700px; margin: 0 auto; font-weight: 300; }
         .divider { width: 60px; height: 3px; background: var(--brand); margin: 30px auto; }
 
-        /* --- CONTEÚDO TÉCNICO (3 PÁGINAS) --- */
-        .content-container { max-width: 900px; margin: -50px auto 0; position: relative; z-index: 10; padding: 0 20px; }
+        /* --- CONTEÚDO TÉCNICO --- */
+        .content-container { max-width: 900px; margin: -100px auto 0; position: relative; z-index: 10; padding: 0 20px; flex: 1;}
         
         .technical-section {
             background: var(--white); padding: 50px; border-radius: 8px;
@@ -85,19 +85,18 @@
         .data-table { width: 100%; border-collapse: collapse; margin: 30px 0; }
         .data-table th { background: var(--dark-bg); color: white; padding: 15px; text-align: left; }
         .data-table td { padding: 15px; border-bottom: 1px solid #e2e8f0; font-size: 0.95rem; }
-        .stat-highlight { font-size: 1.5rem; font-weight: 700; color: var(--brand); }
 
         /* CALENDÁRIO */
         .calendar-grid {
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; margin-top: 30px;
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 15px; margin-top: 30px;
         }
         .cal-item {
             background: white; border: 1px solid #e2e8f0; padding: 15px; border-radius: 6px;
-            display: flex; align-items: center; gap: 10px; font-size: 0.9rem; font-weight: 600;
+            display: flex; align-items: center; gap: 10px; font-size: 0.85rem; font-weight: 600;
             transition: 0.3s;
         }
         .cal-item:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.05); border-color: var(--brand); }
-        .dot { width: 12px; height: 12px; border-radius: 50%; display: inline-block; }
+        .dot { width: 12px; height: 12px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
 
         /* QUIZ */
         .quiz-container { background: var(--brand-light); padding: 60px 40px; margin-top: 60px; border-radius: 8px; }
@@ -111,7 +110,6 @@
             border-radius: 50%; border: 2px solid var(--brand); box-shadow: 0 2px 5px rgba(0,0,0,0.2);
             transition: transform 0.2s;
         }
-        input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.2); }
 
         /* RESULTADOS */
         #result-area { display: none; background: var(--dark-bg); color: white; padding: 80px 20px; text-align: center; margin-top: 0; }
@@ -134,10 +132,26 @@
         }
         .btn-whatsapp:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(37, 211, 102, 0.4); }
 
+        /* FOOTER */
+        footer {
+            background-color: var(--white);
+            color: var(--text-body);
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 50px;
+            border-top: 1px solid #e2e8f0;
+            font-size: 0.9rem;
+        }
+        footer strong { color: var(--brand); }
+        footer .legal { font-size: 0.8rem; color: var(--text-light); margin-top: 5px; font-style: italic; }
+        footer .links { margin-top: 15px; }
+        footer a { color: var(--dark-bg); text-decoration: none; font-weight: 600; margin: 0 10px; transition: 0.3s; }
+        footer a:hover { color: var(--brand); }
+
         @media(max-width: 768px) {
             .concept-grid, .calendar-grid { grid-template-columns: 1fr; }
             header h1 { font-size: 2.2rem; }
-            .content-container { padding: 0 15px; margin-top: -30px; }
+            .content-container { padding: 0 15px; margin-top: -50px; }
             .technical-section { padding: 30px 20px; }
         }
         @media print {
@@ -147,6 +161,7 @@
             #result-area { display: block !important; background: white !important; color: black !important; }
             .score-circle { border-color: black; color: black; }
             .diagnosis-text { background: #eee; color: black; }
+            footer { display: block !important; border-top: 1px solid black; }
         }
     </style>
 </head>
@@ -156,7 +171,7 @@
         <div class="lock-box">
             <div class="lock-logo">CRESCENZA</div>
             <p style="color: #94a3b8; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase;">Acesso Corporativo Restrito</p>
-            <input type="password" id="passInput" class="lock-input" placeholder="SENHA" onkeypress="checkEnter(event)">
+            <input type="password" id="passInput" class="lock-input" placeholder="DIGITE A SENHA" onkeypress="checkEnter(event)">
             <button class="btn-brand" onclick="unlockSystem()">Acessar Ferramenta</button>
             <p id="error-msg" style="color: #ef4444; margin-top: 15px; display: none; font-size: 0.9rem;">Senha Incorreta</p>
         </div>
@@ -175,25 +190,25 @@
 
             <section class="technical-section">
                 <h2 class="tech-title">1. A Ciência da Gestão de Pessoas</h2>
-                <p>No ambiente corporativo moderno, existe uma confusão perigosa entre "avisar os funcionários" e "conquistar os funcionários". Para o sucesso do seu negócio, é vital diferenciar as duas disciplinas baseadas nas teorias de <strong>Margarida Kunsch</strong> e <strong>Saul Bekin</strong>.</p>
+                <p>No ambiente corporativo moderno, existe uma confusão perigosa entre "avisar os funcionários" e "conquistar os funcionários". Para o sucesso do seu negócio, é vital diferenciar as duas disciplinas, baseando-se em teóricos como <strong>Margarida Kunsch</strong> e <strong>Saul Bekin</strong>.</p>
 
                 <div class="concept-grid">
                     <div class="concept-card">
                         <h3><i class="fas fa-sitemap"></i> Comunicação Interna</h3>
-                        <p>É o <strong>Sistema Nervoso</strong> da empresa. Seu foco é operacional, logístico e informativo. Garante que a regra, o aviso e o procedimento cheguem a todos. Sem ela, a empresa para, mas ela sozinha não gera paixão.</p>
-                        <span class="author-ref">Ref: Margarida Kunsch (Planejamento de RP)</span>
+                        <p>É o <strong>Sistema Nervoso</strong> da empresa. Segundo Kunsch, seu foco é operacional e informativo. Garante que a regra, o aviso e o procedimento cheguem a todos. Sem ela, a empresa para, mas ela sozinha não gera paixão ou engajamento emocional.</p>
+                        <span class="author-ref">Foco: Informação & Processo</span>
                     </div>
                     <div class="concept-card" style="border-color: var(--brand);">
                         <h3><i class="fas fa-heart"></i> Endomarketing</h3>
-                        <p>É o <strong>Coração</strong> da empresa. Baseia-se na premissa de que o colaborador é o "Primeiro Cliente". Utiliza ferramentas de marketing para vender a missão da empresa, gerar orgulho, reter talentos e criar um clima de alta performance.</p>
-                        <span class="author-ref">Ref: Saul Bekin (Endomarketing)</span>
+                        <p>É o <strong>Coração</strong> da empresa. Saul Bekin define como "tratar o colaborador como cliente". Utiliza ferramentas de marketing para vender a missão da empresa, gerar orgulho, reter talentos e criar um clima de alta performance.</p>
+                        <span class="author-ref">Foco: Motivação & Pertencimento</span>
                     </div>
                 </div>
             </section>
 
             <section class="technical-section">
                 <h2 class="tech-title">2. Impacto Financeiro (ROI)</h2>
-                <p>Investir em Endomarketing não é "custo", é estratégia de proteção de caixa. Estudos da <strong>Gallup</strong> e <strong>Harvard Business Review</strong> comprovam que o engajamento afeta diretamente a última linha do balanço.</p>
+                <p>Investir em Endomarketing não é "custo", é estratégia de proteção de caixa. Estudos globais comprovam que o engajamento afeta diretamente a última linha do balanço.</p>
 
                 <table class="data-table">
                     <thead>
@@ -206,49 +221,46 @@
                     <tbody>
                         <tr>
                             <td><strong>Lucratividade</strong></td>
-                            <td>Empresas com alto engajamento são <span style="color:var(--brand)">21% mais lucrativas</span>.</td>
+                            <td>Empresas engajadas são <span style="color:var(--brand)">21% mais lucrativas</span>.</td>
                             <td>Gallup (Q12 Report)</td>
                         </tr>
                         <tr>
-                            <td><strong>Turnover (Rotatividade)</strong></td>
-                            <td>Custo de reposição chega a <span style="color:var(--brand)">9 meses de salário</span> por pessoa.</td>
+                            <td><strong>Custo de Turnover</strong></td>
+                            <td>Substituir um talento custa até <span style="color:var(--brand)">9 salários</span> dele.</td>
                             <td>SHRM</td>
                         </tr>
                         <tr>
                             <td><strong>Produtividade</strong></td>
-                            <td>Colaboradores felizes são <span style="color:var(--brand)">31% mais produtivos</span>.</td>
-                            <td>Shawn Achor (Harvard)</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Absenteísmo</strong></td>
-                            <td>Redução de até <span style="color:var(--brand)">41% nas faltas</span> e atestados.</td>
-                            <td>Gallup</td>
+                            <td>Colaboradores felizes produzem <span style="color:var(--brand)">31% mais</span>.</td>
+                            <td>Harvard Business Review</td>
                         </tr>
                     </tbody>
                 </table>
                 <p style="background: var(--brand-light); padding: 15px; border-left: 4px solid var(--brand); font-style: italic;">
-                    "Clientes não amarão sua empresa até que seus colaboradores a amem primeiro." — Simon Sinek
+                    "O cliente só vai amar a sua empresa se os seus colaboradores a amarem primeiro." — Simon Sinek
                 </p>
             </section>
 
             <section class="technical-section">
                 <h2 class="tech-title">3. O Poder do Calendário Estratégico</h2>
-                <p>Um erro comum é fazer ações soltas. A **Crescenza** defende o "Calendário com Propósito": conectar datas comerciais, campanhas de saúde (cores) e marcos institucionais em uma narrativa única anual.</p>
+                <p>O Endomarketing falha quando é apenas "festa". A <strong>Crescenza</strong> aplica o conceito de "Calendário com Propósito": conectar datas comerciais, campanhas de saúde e marcos institucionais em uma narrativa que educa e engaja.</p>
                 
-                <h4 style="margin-top: 30px; color: var(--text-light); text-transform: uppercase; letter-spacing: 1px;">Jornada Anual Sugerida:</h4>
+                <h4 style="margin-top: 30px; color: var(--text-light); text-transform: uppercase; letter-spacing: 1px; font-size: 0.8rem;">Jornada Anual Sugerida:</h4>
                 <div class="calendar-grid">
                     <div class="cal-item"><span class="dot" style="background:white; border:2px solid #ccc;"></span> Janeiro Branco (Saúde Mental)</div>
-                    <div class="cal-item"><span class="dot" style="background:purple;"></span> Março: Dia das Mulheres</div>
-                    <div class="cal-item"><span class="dot" style="background:#4caf50;"></span> Abril Verde (Segurança)</div>
-                    <div class="cal-item"><span class="dot" style="background:#795548;"></span> Páscoa (Família/Partilha)</div>
+                    <div class="cal-item"><span class="dot" style="background:#4caf50;"></span> Abril Verde (Segurança Trabalho)</div>
                     <div class="cal-item"><span class="dot" style="background:#ffeb3b;"></span> Maio Amarelo (Trânsito)</div>
-                    <div class="cal-item"><span class="dot" style="background:var(--dark-bg);"></span> 1º Maio: Dia do Trabalhador</div>
                     <div class="cal-item"><span class="dot" style="background:#f44336;"></span> Junho Vermelho (Doação Sangue)</div>
+                    <div class="cal-item"><span class="dot" style="background:#ffeb3b;"></span> Setembro Amarelo (Valorização Vida)</div>
+                    <div class="cal-item"><span class="dot" style="background:#e91e63;"></span> Outubro Rosa (Saúde Mulher)</div>
+                    <div class="cal-item"><span class="dot" style="background:#3f51b5;"></span> Novembro Azul (Saúde Homem)</div>
+                    
+                    <div class="cal-item"><span class="dot" style="background:purple;"></span> Março: Dia das Mulheres</div>
+                    <div class="cal-item"><span class="dot" style="background:#795548;"></span> Páscoa (Família/Partilha)</div>
+                    <div class="cal-item"><span class="dot" style="background:var(--dark-bg);"></span> 1º Maio: Dia do Trabalhador</div>
                     <div class="cal-item"><span class="dot" style="background:#2196f3;"></span> Agosto: Dia dos Pais</div>
-                    <div class="cal-item"><span class="dot" style="background:#ffeb3b;"></span> Setembro Amarelo (Vida)</div>
-                    <div class="cal-item"><span class="dot" style="background:#e91e63;"></span> Outubro Rosa (Prev. Mulher)</div>
-                    <div class="cal-item"><span class="dot" style="background:#3f51b5;"></span> Novembro Azul (Prev. Homem)</div>
                     <div class="cal-item"><span class="dot" style="background:#d4af37;"></span> Dezembro: Natal & Futuro</div>
+                    
                     <div class="cal-item" style="border-color:var(--brand);"><span class="dot" style="background:var(--brand);"></span> Aniversário da Empresa</div>
                     <div class="cal-item" style="border-color:var(--brand);"><span class="dot" style="background:var(--brand);"></span> Aniversário do Colaborador</div>
                     <div class="cal-item" style="border-color:var(--brand);"><span class="dot" style="background:var(--brand);"></span> Onboarding (Boas-vindas)</div>
@@ -258,12 +270,12 @@
             <div class="quiz-container">
                 <div style="text-align: center; margin-bottom: 40px;">
                     <h2 style="color: var(--dark-bg);">Diagnóstico de Maturidade 360°</h2>
-                    <p>Avalie sua empresa nos pilares abaixo (0 = Inexistente, 10 = Excelência Cultural).</p>
+                    <p>Avalie honestamente sua empresa nos pilares abaixo (0 = Inexistente, 10 = Excelência Cultural).</p>
                 </div>
 
                 <div class="pillar-row">
                     <h3>1. Estratégia de Comunicação</h3>
-                    <p style="font-size:0.9rem; color:#64748b;">Existe distinção clara entre avisos operacionais e campanhas motivacionais? Os canais são eficazes?</p>
+                    <p style="font-size:0.9rem; color:#64748b;">Existe distinção clara entre avisos operacionais e campanhas motivacionais? Os canais chegam a todos?</p>
                     <div style="display:flex; justify-content:space-between; margin-top:10px; font-weight:bold; color:var(--brand);">
                         <span>0</span><span class="val-display">0</span><span>10</span>
                     </div>
@@ -290,7 +302,7 @@
 
                 <div class="pillar-row">
                     <h3>4. Clima e Liderança</h3>
-                    <p style="font-size:0.9rem; color:#64748b;">Os líderes são comunicadores da cultura? Existe pesquisa de clima regular e plano de ação?</p>
+                    <p style="font-size:0.9rem; color:#64748b;">Os líderes são comunicadores da cultura? Existe pesquisa de clima regular e plano de ação sobre os dados?</p>
                     <div style="display:flex; justify-content:space-between; margin-top:10px; font-weight:bold; color:var(--brand);">
                         <span>0</span><span class="val-display">0</span><span>10</span>
                     </div>
@@ -298,8 +310,8 @@
                 </div>
 
                 <div class="pillar-row">
-                    <h3>5. Reconhecimento e Benefícios</h3>
-                    <p style="font-size:0.9rem; color:#64748b;">O pacote de benefícios é percebido como valor? Existe cultura de elogio e feedback?</p>
+                    <h3>5. Reconhecimento</h3>
+                    <p style="font-size:0.9rem; color:#64748b;">Existe cultura de elogio e feedback? As vitórias são celebradas ou apenas "obrigação"?</p>
                     <div style="display:flex; justify-content:space-between; margin-top:10px; font-weight:bold; color:var(--brand);">
                         <span>0</span><span class="val-display">0</span><span>10</span>
                     </div>
@@ -330,13 +342,13 @@
             </div>
 
             <div class="cta-buttons">
-                <a href="https://wa.me/55996842002?text=Olá,%20fiz%20o%20diagnóstico%20de%20endomarketing%20e%20quero%20agendar%20uma%20reunião." target="_blank" class="btn-whatsapp">
-                    <i class="fab fa-whatsapp"></i> Agendar Diagnóstico Profundo
+                <a href="https://wa.me/55996842002?text=Olá,%20fiz%20o%20diagnóstico%20de%20endomarketing%20e%20gostaria%20de%20analisar%20meu%20resultado%20com%20um%20especialista." target="_blank" class="btn-whatsapp">
+                    <i class="fab fa-whatsapp"></i> Falar com Especialista
                 </a>
                 <a href="mailto:contato@crescenza.com.br" class="btn-outline">
                     <i class="far fa-envelope"></i> Enviar E-mail
                 </a>
-                <a href="http://www.crescenza.com.br" target="_blank" class="btn-outline">
+                <a href="https://www.crescenzaonline.com/" target="_blank" class="btn-outline">
                     <i class="fas fa-globe"></i> Visitar Site
                 </a>
             </div>
@@ -346,10 +358,19 @@
             </button>
         </div>
 
+        <footer>
+            <p>Produto desenvolvido pela <strong>Crescenza Consultoria</strong></p>
+            <p class="legal">Proibida a reprodução ou comercialização sem autorização prévia.</p>
+            <div class="links">
+                <a href="https://www.crescenzaonline.com/" target="_blank">www.crescenzaonline.com</a> |
+                <a href="https://instagram.com/crescenzaonline" target="_blank">@crescenzaonline</a>
+            </div>
+        </footer>
+
     </div>
 
     <script>
-        const PASSWORD = "CRESCENZA";
+        const PASSWORD = "ENDOMARKETINGCRESCENZA";
 
         function checkEnter(e) {
             if(e.key === "Enter") unlockSystem();
@@ -367,7 +388,7 @@
         }
 
         function updateVal(el) {
-            // Atualiza o número entre os extremos 0 e 10
+            // Atualiza o display do valor (span do meio)
             el.previousElementSibling.children[1].innerText = el.value;
         }
 
@@ -375,6 +396,7 @@
             const inputs = document.querySelectorAll('.score-input');
             let total = 0;
             inputs.forEach(i => total += parseInt(i.value));
+            // Cálculo sobre 60 pontos possíveis
             const percent = Math.round((total / 60) * 100);
 
             const resultArea = document.getElementById('result-area');
@@ -391,10 +413,10 @@
                 titleDisplay.innerText = "Zona de Risco Cultural";
                 planName.innerText = "Recomendação: Plano Crescenza 90° (Estruturação)";
                 planDesc.innerHTML = `
-                    <p>Sua empresa apresenta sinais de desconexão entre liderança e base. O risco de turnover e "rádio peão" é alto.</p>
+                    <p>Sua empresa apresenta sinais de desconexão entre liderança e base. O risco de turnover e ruídos de comunicação é alto.</p>
                     <ul style="margin-top:15px; padding-left:20px;">
-                        <li><strong>Ação Imediata:</strong> Implementar canais oficiais e estruturar o Onboarding básico.</li>
-                        <li><strong>Foco:</strong> O novo funcionário precisa se sentir seguro e informado nos primeiros 90 dias.</li>
+                        <li><strong>Diagnóstico:</strong> Processos básicos de comunicação e integração (Onboarding) inexistentes ou falhos.</li>
+                        <li><strong>Ação Imediata:</strong> Implementar canais oficiais e estruturar o Kit de Boas-vindas. O novo funcionário precisa se sentir seguro nos primeiros 90 dias.</li>
                     </ul>`;
             } else if (percent < 75) {
                 // Nível Médio
@@ -402,10 +424,10 @@
                 titleDisplay.innerText = "Em Desenvolvimento";
                 planName.innerText = "Recomendação: Plano Crescenza 180° (Consistência)";
                 planDesc.innerHTML = `
-                    <p>A empresa tem boas iniciativas, mas falta constância. Os colaboradores percebem as ações como "eventos isolados" e não como cultura.</p>
+                    <p>A empresa tem boas iniciativas, mas falta constância. Os colaboradores percebem as ações como "eventos isolados" e não como cultura perene.</p>
                     <ul style="margin-top:15px; padding-left:20px;">
-                        <li><strong>Ação Imediata:</strong> Ativar o Calendário Anual com Propósito e rodar Pesquisa de Clima.</li>
-                        <li><strong>Foco:</strong> Transformar eventos esporádicos em rituais previsíveis.</li>
+                        <li><strong>Diagnóstico:</strong> Ações de endomarketing reativas (apenas festas) e falta de mensuração.</li>
+                        <li><strong>Ação Imediata:</strong> Ativar o Calendário Anual com Propósito e rodar Pesquisa de Clima regular para agir preventivamente.</li>
                     </ul>`;
             } else {
                 // Nível Alto
@@ -413,10 +435,10 @@
                 titleDisplay.innerText = "Cultura de Excelência";
                 planName.innerText = "Recomendação: Plano Crescenza 360° (Employer Branding)";
                 planDesc.innerHTML = `
-                    <p>Sua base é sólida. O desafio agora é atração de talentos de alta performance e inovação na gestão.</p>
+                    <p>Sua base é sólida. O desafio agora é inovação e atração de talentos de alta performance (Marca Empregadora).</p>
                     <ul style="margin-top:15px; padding-left:20px;">
-                        <li><strong>Ação Imediata:</strong> Programa de Embaixadores da Marca e Universidade Corporativa.</li>
-                        <li><strong>Foco:</strong> Tornar a empresa uma referência desejada no mercado (Marca Empregadora).</li>
+                        <li><strong>Diagnóstico:</strong> Equipe engajada, exige desafios e plano de carreira claro.</li>
+                        <li><strong>Ação Imediata:</strong> Programa de Embaixadores da Marca e Universidade Corporativa para retenção de talentos-chave.</li>
                     </ul>`;
             }
 
