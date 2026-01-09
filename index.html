@@ -2,272 +2,199 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>Diagnóstico de Endomarketing | Crescenza</title>
+<title>Crescenza | Diagnóstico Estratégico de Endomarketing</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- FONTES -->
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700&family=Playfair+Display:wght@600;800&display=swap" rel="stylesheet">
-
-<!-- ÍCONES -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-<!-- CHART.JS -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-<!-- JSPDF -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <style>
-:root{
---brand:#e65100;
---navy:#0f172a;
---bg:#f8fafc;
---text:#334155;
---white:#ffffff;
+body{
+font-family:Arial, Helvetica, sans-serif;
+background:#f4f6f8;
+margin:0;
+color:#1f2933;
 }
 
-body{
-font-family:'Manrope',sans-serif;
-background:var(--bg);
-color:var(--text);
-margin:0;
-}
+.hidden{display:none;}
 
 .container{
 max-width:900px;
 margin:auto;
 background:#fff;
-box-shadow:0 0 40px rgba(0,0,0,.05);
+padding:40px;
 }
 
-header{
-background:linear-gradient(135deg,var(--navy),#1e293b);
-color:#fff;
-padding:70px 40px;
-text-align:center;
+h1,h2,h3{
+color:#0f172a;
 }
 
-header h1{
-font-family:'Playfair Display',serif;
-font-size:3rem;
-margin-bottom:15px;
+p{
+line-height:1.7;
+margin-bottom:16px;
 }
 
-section{
-padding:50px 40px;
+.section{
+margin-bottom:60px;
 }
 
 .pillar{
-margin-bottom:30px;
-}
-
-.pillar label{
-font-weight:700;
-display:block;
-margin-bottom:10px;
+border-left:4px solid #e65100;
+padding-left:20px;
+margin-bottom:40px;
 }
 
 input[type=range]{
 width:100%;
 }
 
-.score{
-text-align:right;
-font-weight:700;
-color:var(--brand);
-}
-
 button{
-width:100%;
-padding:18px;
+padding:14px 20px;
 border:none;
-background:var(--brand);
+background:#e65100;
 color:#fff;
-font-size:1.1rem;
-font-weight:700;
+font-size:1rem;
 cursor:pointer;
-border-radius:6px;
-}
-
-#result{
-display:none;
-background:var(--navy);
-color:#fff;
-}
-
-.result-box{
-background:rgba(255,255,255,.05);
-padding:30px;
-border-left:4px solid var(--brand);
-margin:30px 0;
-}
-
-canvas{
-max-width:100%;
-margin:40px auto;
-}
-
-.btn-pdf{
 margin-top:20px;
+}
+
+#login{
+max-width:400px;
+margin:100px auto;
 background:#fff;
-color:var(--navy);
+padding:40px;
+text-align:center;
+box-shadow:0 0 20px rgba(0,0,0,.1);
 }
 </style>
 </head>
 
 <body>
 
+<!-- LOGIN -->
+<div id="login">
+<h2>Acesso Restrito</h2>
+<p>Este material faz parte de uma metodologia exclusiva Crescenza.</p>
+<input type="password" id="senha" placeholder="Digite a senha">
+<br><br>
+<button onclick="acessar()">Acessar</button>
+<p id="erro" style="color:red;"></p>
+</div>
+
+<!-- CONTEÚDO -->
+<div id="conteudo" class="hidden">
 <div class="container">
 
-<header>
-<h1>Diagnóstico de Endomarketing</h1>
-<p>Avaliação estratégica da maturidade cultural da sua empresa</p>
-</header>
+<!-- MANIFESTO -->
+<div class="section">
+<h1>Crescenza</h1>
+<p><strong>Crescenza</strong> nasce da compreensão de que empresas crescem quando pessoas crescem.</p>
+<p>Não falamos de ações isoladas, campanhas pontuais ou datas comemorativas. Falamos de <strong>cultura viva</strong>, construída no cotidiano, nas decisões, na comunicação e na forma como cada colaborador se sente pertencente.</p>
+<p>Este material não é um teste. É uma <strong>experiência de consciência organizacional</strong>.</p>
+</div>
 
-<section>
+<!-- SOBRE O TRABALHO -->
+<div class="section">
+<h2>Sobre a Metodologia</h2>
+<p>Meu trabalho une estratégia, gestão de pessoas e leitura profunda de cultura organizacional.</p>
+<p>Antes de medir, eu ensino. Antes de recomendar, eu contextualizo. Porque diagnóstico sem compreensão gera resistência — não mudança.</p>
+</div>
+
+<!-- DIAGNÓSTICO -->
+<div class="section">
+<h2>Diagnóstico de Maturidade em Endomarketing</h2>
+<p>A seguir, você avaliará seis pilares essenciais. Leia com atenção cada explicação antes de responder.</p>
+
 <div class="pillar">
-<label>1. Comunicação com Propósito</label>
-<input type="range" min="0" max="10" value="0" oninput="this.nextElementSibling.innerText=this.value">
-<div class="score">0</div>
+<h3>1. Comunicação com Propósito</h3>
+<p>Não é sobre informar. É sobre gerar sentido. Comunicação com propósito conecta estratégia, cultura e pessoas.</p>
+<input type="range" min="0" max="10" value="0">
 </div>
 
 <div class="pillar">
-<label>2. Clima & Engajamento</label>
-<input type="range" min="0" max="10" value="0" oninput="this.nextElementSibling.innerText=this.value">
-<div class="score">0</div>
+<h3>2. Clima & Engajamento</h3>
+<p>Engajamento não se exige, se constrói. Ele nasce da coerência entre discurso e prática.</p>
+<input type="range" min="0" max="10" value="0">
 </div>
 
 <div class="pillar">
-<label>3. Onboarding Humanizado</label>
-<input type="range" min="0" max="10" value="0" oninput="this.nextElementSibling.innerText=this.value">
-<div class="score">0</div>
+<h3>3. Onboarding Humanizado</h3>
+<p>A forma como alguém entra define o quanto ele ficará. Onboarding é vínculo, não checklist.</p>
+<input type="range" min="0" max="10" value="0">
 </div>
 
 <div class="pillar">
-<label>4. Reconhecimento & Valorização</label>
-<input type="range" min="0" max="10" value="0" oninput="this.nextElementSibling.innerText=this.value">
-<div class="score">0</div>
+<h3>4. Reconhecimento & Valorização</h3>
+<p>Pessoas que não se sentem vistas, silenciosamente se desligam — mesmo permanecendo.</p>
+<input type="range" min="0" max="10" value="0">
 </div>
 
 <div class="pillar">
-<label>5. Treinamento & Desenvolvimento</label>
-<input type="range" min="0" max="10" value="0" oninput="this.nextElementSibling.innerText=this.value">
-<div class="score">0</div>
+<h3>5. Treinamento & Desenvolvimento</h3>
+<p>Desenvolver não é treinar para a função apenas, é preparar para o futuro.</p>
+<input type="range" min="0" max="10" value="0">
 </div>
 
 <div class="pillar">
-<label>6. Saúde & Bem-Estar</label>
-<input type="range" min="0" max="10" value="0" oninput="this.nextElementSibling.innerText=this.value">
-<div class="score">0</div>
+<h3>6. Saúde & Bem-Estar</h3>
+<p>Produtividade sustentável exige saúde emocional, mental e relacional.</p>
+<input type="range" min="0" max="10" value="0">
 </div>
 
-<button onclick="gerarResultado()">GERAR DIAGNÓSTICO</button>
-</section>
+<button onclick="gerarResultado()">Gerar Diagnóstico</button>
+</div>
 
-<section id="result">
-<h2 style="text-align:center;">Resultado Executivo</h2>
+<!-- RESULTADO -->
+<div class="section hidden" id="resultado">
+<h2>Resultado Executivo</h2>
+<h1 id="percentual"></h1>
+<div id="leitura"></div>
+<canvas id="radar"></canvas>
+<button onclick="gerarPDF()">Gerar PDF Executivo</button>
+</div>
 
-<h1 id="percentual" style="text-align:center;font-size:3rem;"></h1>
-
-<div class="result-box" id="leitura"></div>
-
-<canvas id="radarChart"></canvas>
-
-<button class="btn-pdf" onclick="gerarPDF()">GERAR PDF EXECUTIVO</button>
-</section>
-
+</div>
 </div>
 
 <script>
-let radar;
+function acessar(){
+const senha="crescenza360";
+if(document.getElementById("senha").value===senha){
+document.getElementById("login").style.display="none";
+document.getElementById("conteudo").classList.remove("hidden");
+}else{
+document.getElementById("erro").innerText="Senha incorreta.";
+}
+}
 
 function gerarResultado(){
-const sliders=document.querySelectorAll('input[type=range]');
-const pesos=[0.20,0.20,0.15,0.15,0.15,0.15];
+const sliders=document.querySelectorAll("input[type=range]");
+const pesos=[0.2,0.2,0.15,0.15,0.15,0.15];
 let total=0;
-let valores=[];
-
+let dados=[];
 sliders.forEach((s,i)=>{
-const nota=parseInt(s.value);
-valores.push(nota);
-total+=(nota/10)*pesos[i]*100;
+dados.push(Number(s.value));
+total+=(s.value/10)*pesos[i]*100;
 });
+document.getElementById("percentual").innerText=Math.round(total)+"%";
+document.getElementById("resultado").classList.remove("hidden");
 
-const percent=Math.round(total);
-document.getElementById('percentual').innerText=percent+"%";
-document.getElementById('result').style.display="block";
-
-let leitura="";
-if(percent<45){
-leitura=`<h3>Maturidade Crítica</h3>
-<p>A cultura não sustenta engajamento. O risco de turnover é elevado e a comunicação é reativa.</p>
-<p><strong>Plano indicado:</strong> Crescenza 90°</p>`;
-}else if(percent<75){
-leitura=`<h3>Maturidade em Desenvolvimento</h3>
-<p>Existem boas práticas, mas ainda sem consistência cultural e rotina estruturada.</p>
-<p><strong>Plano indicado:</strong> Crescenza 180°</p>`;
-}else{
-leitura=`<h3>Alta Maturidade Cultural</h3>
-<p>A empresa possui cultura viva, engajamento e base sólida para employer branding.</p>
-<p><strong>Plano indicado:</strong> Crescenza 360°</p>`;
-}
-
-document.getElementById('leitura').innerHTML=leitura;
-gerarRadar(valores);
-}
-
-function gerarRadar(valores){
-const ctx=document.getElementById('radarChart');
-if(radar) radar.destroy();
-
-radar=new Chart(ctx,{
-type:'radar',
+new Chart(document.getElementById("radar"),{
+type:"radar",
 data:{
-labels:[
-'Comunicação',
-'Clima',
-'Onboarding',
-'Reconhecimento',
-'T&D',
-'Bem-estar'
-],
-datasets:[{
-label:'Maturidade',
-data:valores,
-backgroundColor:'rgba(230,81,0,.2)',
-borderColor:'#e65100',
-borderWidth:2
-}]
+labels:["Comunicação","Clima","Onboarding","Reconhecimento","T&D","Bem-estar"],
+datasets:[{data:dados,backgroundColor:"rgba(230,81,0,.3)",borderColor:"#e65100"}]
 },
-options:{
-scales:{
-r:{
-min:0,
-max:10,
-ticks:{stepSize:2}
-}
-}
+options:{scales:{r:{min:0,max:10}}}
 });
 }
 
 function gerarPDF(){
-const { jsPDF } = window.jspdf;
+const {jsPDF}=window.jspdf;
 const doc=new jsPDF();
-
-doc.setFontSize(18);
-doc.text("Diagnóstico de Endomarketing – Crescenza",10,20);
-
-doc.setFontSize(14);
-doc.text("Resultado Geral:",10,40);
-doc.text(document.getElementById('percentual').innerText,10,50);
-
-doc.setFontSize(12);
-doc.text("Leitura Executiva:",10,70);
-
-const texto=document.getElementById('leitura').innerText;
-doc.text(texto,10,80,{maxWidth:180});
-
-doc.save("Diagnostico_Endomarketing_Crescenza.pdf");
+doc.text("Diagnóstico Crescenza",10,20);
+doc.text("Resultado: "+document.getElementById("percentual").innerText,10,40);
+doc.save("Diagnostico_Crescenza.pdf");
 }
 </script>
 
