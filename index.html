@@ -1,423 +1,275 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diagnóstico Estratégico | Crescenza Consultoria</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,600;0,800;1,600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<meta charset="UTF-8">
+<title>Diagnóstico de Endomarketing | Crescenza</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-        /* --- DESIGN SYSTEM CRESCENZA --- */
-        :root {
-            --brand: #e65100;       /* Laranja Identidade */
-            --brand-light: #fff7ed;
-            --navy: #0f172a;        /* Azul Corporativo */
-            --text: #334155;        /* Cinza Leitura */
-            --bg: #f8fafc;          /* Fundo Suave */
-            --white: #ffffff;
-            --gold: #d4af37;
-        }
+<!-- FONTES -->
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700&family=Playfair+Display:wght@600;800&display=swap" rel="stylesheet">
 
-        * { margin: 0; padding: 0; box-sizing: border-box; outline: none; }
+<!-- ÍCONES -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-        body {
-            font-family: 'Manrope', sans-serif;
-            background-color: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
-        }
+<!-- CHART.JS -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; color: var(--navy); }
-        strong { color: var(--brand); font-weight: 700; }
+<!-- JSPDF -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
-        /* --- TELA DE BLOQUEIO (MODAL) --- */
-        #lock-screen {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--navy);
-            z-index: 10000;
-            display: flex; align-items: center; justify-content: center;
-            flex-direction: column;
-        }
-        
-        .lock-card {
-            background: rgba(255,255,255,0.05); padding: 40px; border-radius: 12px;
-            text-align: center; border: 1px solid rgba(255,255,255,0.1);
-            width: 90%; max-width: 400px; backdrop-filter: blur(10px);
-        }
-        
-        .lock-logo { font-size: 2rem; color: var(--brand); font-weight: 800; letter-spacing: 2px; margin-bottom: 5px; font-family: 'Playfair Display', serif; }
-        .lock-text { color: #94a3b8; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 30px; }
-        
-        .input-pass {
-            width: 100%; padding: 15px; background: rgba(0,0,0,0.3); border: 1px solid #475569;
-            color: white; text-align: center; font-size: 1rem; letter-spacing: 2px;
-            text-transform: uppercase; border-radius: 6px; margin-bottom: 20px; transition: 0.3s;
-        }
-        .input-pass:focus { border-color: var(--brand); background: rgba(0,0,0,0.5); }
-        
-        .btn-unlock {
-            width: 100%; padding: 15px; background: var(--brand); color: white; border: none;
-            font-weight: 700; text-transform: uppercase; letter-spacing: 1px; border-radius: 6px;
-            cursor: pointer; transition: 0.3s;
-        }
-        .btn-unlock:hover { background: white; color: var(--brand); }
+<style>
+:root{
+--brand:#e65100;
+--navy:#0f172a;
+--bg:#f8fafc;
+--text:#334155;
+--white:#ffffff;
+}
 
-        /* --- CONTAINER PRINCIPAL --- */
-        .container { max-width: 900px; margin: 0 auto; background: var(--white); box-shadow: 0 0 40px rgba(0,0,0,0.05); }
+body{
+font-family:'Manrope',sans-serif;
+background:var(--bg);
+color:var(--text);
+margin:0;
+}
 
-        /* HERO HEADER */
-        header {
-            background: linear-gradient(135deg, var(--navy) 0%, #1e293b 100%);
-            color: white; padding: 80px 40px; text-align: center;
-        }
-        .tagline { color: var(--brand); font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; display: block; margin-bottom: 15px; }
-        header h1 { color: white; font-size: 3rem; line-height: 1.2; margin-bottom: 20px; }
-        header p { color: #cbd5e1; font-size: 1.1rem; max-width: 600px; margin: 0 auto; font-weight: 300; }
+.container{
+max-width:900px;
+margin:auto;
+background:#fff;
+box-shadow:0 0 40px rgba(0,0,0,.05);
+}
 
-        /* SEÇÃO EDUCACIONAL (ORIENTATIVO) */
-        .edu-section { padding: 60px 40px; }
-        
-        .concept-box {
-            background: var(--brand-light); border-left: 5px solid var(--brand);
-            padding: 30px; margin: 40px 0; border-radius: 0 10px 10px 0;
-        }
-        .concept-quote { font-size: 1.4rem; font-family: 'Playfair Display', serif; font-style: italic; color: #431407; margin-bottom: 10px; }
-        .concept-source { font-size: 0.8rem; text-transform: uppercase; color: var(--brand); font-weight: 700; }
+header{
+background:linear-gradient(135deg,var(--navy),#1e293b);
+color:#fff;
+padding:70px 40px;
+text-align:center;
+}
 
-        .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 40px; }
-        @media(max-width: 768px) { .edu-grid { grid-template-columns: 1fr; } }
+header h1{
+font-family:'Playfair Display',serif;
+font-size:3rem;
+margin-bottom:15px;
+}
 
-        .edu-card h3 { font-size: 1.3rem; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
-        .edu-card p { font-size: 0.95rem; color: #475569; text-align: justify; }
+section{
+padding:50px 40px;
+}
 
-        /* DIAGNÓSTICO */
-        .diag-section { background: #fafafa; padding: 60px 40px; border-top: 1px solid #f1f5f9; }
-        .section-title { text-align: center; margin-bottom: 50px; }
-        .section-title h2 { font-size: 2.2rem; margin-bottom: 10px; }
-        
-        .pillar-card {
-            background: var(--white); padding: 30px; border-radius: 12px; margin-bottom: 30px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.02); border: 1px solid #f1f5f9;
-            transition: transform 0.3s;
-        }
-        .pillar-card:hover { transform: translateY(-5px); border-color: var(--brand); }
+.pillar{
+margin-bottom:30px;
+}
 
-        .pillar-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
-        .pillar-name { font-size: 1.2rem; font-weight: 700; color: var(--navy); display: flex; align-items: center; gap: 10px; }
-        .pillar-ref { background: #e2e8f0; font-size: 0.7rem; padding: 4px 8px; border-radius: 4px; font-weight: 700; color: #475569; }
+.pillar label{
+font-weight:700;
+display:block;
+margin-bottom:10px;
+}
 
-        .pillar-desc { font-size: 0.95rem; margin-bottom: 20px; color: #64748b; }
-        
-        .range-wrap { margin-top: 20px; }
-        .range-labels { display: flex; justify-content: space-between; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: #94a3b8; margin-bottom: 8px; }
-        
-        input[type=range] {
-            width: 100%; height: 6px; background: #cbd5e1; border-radius: 5px; -webkit-appearance: none; cursor: pointer;
-        }
-        input[type=range]::-webkit-slider-thumb {
-            -webkit-appearance: none; width: 24px; height: 24px; background: var(--brand);
-            border-radius: 50%; border: 3px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-            transition: transform 0.1s;
-        }
-        input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.2); }
-        
-        .score-display { text-align: right; font-weight: 700; color: var(--brand); font-size: 1.1rem; margin-top: 5px; }
+input[type=range]{
+width:100%;
+}
 
-        /* RESULTADO */
-        #result-area { display: none; background: var(--navy); color: white; padding: 60px 40px; text-align: center; }
-        
-        .result-circle {
-            width: 140px; height: 140px; border-radius: 50%; border: 8px solid var(--brand);
-            display: flex; align-items: center; justify-content: center; margin: 0 auto 30px;
-            font-size: 2.5rem; font-family: 'Playfair Display', serif; font-weight: 700;
-        }
-        
-        .diagnosis-box {
-            background: rgba(255,255,255,0.05); text-align: left; padding: 30px; border-radius: 8px;
-            margin: 40px 0; border-left: 4px solid var(--brand);
-        }
-        .diagnosis-box h3 { color: var(--white); font-size: 1.5rem; margin-bottom: 15px; }
-        .diagnosis-box p { color: #cbd5e1; margin-bottom: 20px; }
-        
-        .cta-box {
-            background: var(--white); color: var(--navy); padding: 40px; border-radius: 12px; margin-top: 40px;
-        }
-        .btn-whatsapp {
-            display: inline-flex; align-items: center; gap: 10px; background: #25D366; color: white;
-            padding: 18px 35px; border-radius: 50px; text-decoration: none; font-weight: 700;
-            font-size: 1rem; transition: 0.3s; margin-top: 20px;
-        }
-        .btn-whatsapp:hover { transform: scale(1.05); box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3); }
+.score{
+text-align:right;
+font-weight:700;
+color:var(--brand);
+}
 
-        /* IMPRESSÃO */
-        @media print {
-            #lock-screen, .btn-action, .btn-whatsapp { display: none !important; }
-            body { background: white; color: black; }
-            .container { box-shadow: none; max-width: 100%; }
-            header { background: white !important; color: black !important; border-bottom: 2px solid black; }
-            header h1, header p { color: black !important; }
-            #result-area { display: block !important; background: white !important; color: black !important; border-top: 2px solid black; }
-            .result-circle { border-color: black; color: black; }
-            .diagnosis-box { background: #eee; color: black; border-color: black; }
-            .diagnosis-box h3, .diagnosis-box p, .diagnosis-box li { color: black !important; }
-        }
-    </style>
+button{
+width:100%;
+padding:18px;
+border:none;
+background:var(--brand);
+color:#fff;
+font-size:1.1rem;
+font-weight:700;
+cursor:pointer;
+border-radius:6px;
+}
+
+#result{
+display:none;
+background:var(--navy);
+color:#fff;
+}
+
+.result-box{
+background:rgba(255,255,255,.05);
+padding:30px;
+border-left:4px solid var(--brand);
+margin:30px 0;
+}
+
+canvas{
+max-width:100%;
+margin:40px auto;
+}
+
+.btn-pdf{
+margin-top:20px;
+background:#fff;
+color:var(--navy);
+}
+</style>
 </head>
+
 <body>
 
-    <div id="lock-screen">
-        <div class="lock-card">
-            <div class="lock-logo">CRESCENZA</div>
-            <div class="lock-text">Ferramenta Exclusiva de Diagnóstico</div>
-            <input type="password" id="password" class="input-pass" placeholder="DIGITE A SENHA" onkeypress="checkEnter(event)">
-            <button class="btn-unlock" onclick="unlock()">Desbloquear Acesso</button>
-            <div id="error-msg" style="color:#ef4444; margin-top:15px; display:none; font-weight:bold; font-size:0.9rem;">Senha Incorreta</div>
-        </div>
-    </div>
+<div class="container">
 
-    <div class="container" id="main-app" style="display:none;">
-        
-        <header>
-            <span class="tagline">Consultoria & Gestão Estratégica</span>
-            <h1>Endomarketing Premium</h1>
-            <p>Diagnóstico de maturidade cultural, engajamento e retenção de talentos baseado em dados.</p>
-        </header>
+<header>
+<h1>Diagnóstico de Endomarketing</h1>
+<p>Avaliação estratégica da maturidade cultural da sua empresa</p>
+</header>
 
-        <div class="edu-section">
-            <div class="concept-box">
-                <p class="concept-quote">"Empresas são feitas de processos, mas movidas por pessoas. O crachá organiza, o propósito mobiliza."</p>
-                [cite_start]<span class="concept-source">DNA Crescenza [cite: 16]</span>
-            </div>
+<section>
+<div class="pillar">
+<label>1. Comunicação com Propósito</label>
+<input type="range" min="0" max="10" value="0" oninput="this.nextElementSibling.innerText=this.value">
+<div class="score">0</div>
+</div>
 
-            <p style="text-align:center; max-width:800px; margin:0 auto; color:#475569;">
-                Muitas empresas falham ao confundir <strong>Comunicação Interna</strong> com <strong>Endomarketing</strong>. Antes de iniciarmos seu diagnóstico, entenda a diferença fundamental que orienta nossa metodologia:
-            </p>
+<div class="pillar">
+<label>2. Clima & Engajamento</label>
+<input type="range" min="0" max="10" value="0" oninput="this.nextElementSibling.innerText=this.value">
+<div class="score">0</div>
+</div>
 
-            <div class="edu-grid">
-                <div class="edu-card">
-                    <h3><i class="fas fa-bullhorn" style="color:var(--brand);"></i> Comunicação Interna</h3>
-                    <p>Foca no "O QUE". Transmite informações, avisos e regras. [cite_start]É operacional e necessária, mas sozinha não gera vínculo emocional. [cite: 53]</p>
-                </div>
-                <div class="edu-card">
-                    <h3><i class="fas fa-heart" style="color:var(--brand);"></i> Endomarketing</h3>
-                    <p>Foca no "PORQUÊ". Segundo Saul Bekin, é tratar o colaborador como cliente. [cite_start]Transforma informação em pertencimento, engajamento e cultura. [cite: 54-56]</p>
-                </div>
-            </div>
-        </div>
+<div class="pillar">
+<label>3. Onboarding Humanizado</label>
+<input type="range" min="0" max="10" value="0" oninput="this.nextElementSibling.innerText=this.value">
+<div class="score">0</div>
+</div>
 
-        <div class="diag-section">
-            <div class="section-title">
-                <h2>Diagnóstico de Maturidade 360°</h2>
-                <p>Avalie sua empresa nos 6 pilares estratégicos da Crescenza.</p>
-            </div>
+<div class="pillar">
+<label>4. Reconhecimento & Valorização</label>
+<input type="range" min="0" max="10" value="0" oninput="this.nextElementSibling.innerText=this.value">
+<div class="score">0</div>
+</div>
 
-            <div class="pillar-card">
-                <div class="pillar-head">
-                    <div class="pillar-name"><i class="fas fa-comments"></i> 1. Comunicação com Propósito</div>
-                    <span class="pillar-ref">Ref: Saul Bekin</span>
-                </div>
-                <p class="pillar-desc">
-                    Sua comunicação apenas "avisa" (mural frio) ou "vende" a empresa para o funcionário? [cite_start]O objetivo é reduzir a "rádio peão" e alinhar discurso e prática[cite: 151].
-                </p>
-                <div class="range-wrap">
-                    <div class="range-labels"><span>Inexistente (0)</span> <span>Estratégica (10)</span></div>
-                    <input type="range" min="0" max="10" value="0" class="score-input" oninput="updateVal(this)">
-                    <div class="score-display">0</div>
-                </div>
-            </div>
+<div class="pillar">
+<label>5. Treinamento & Desenvolvimento</label>
+<input type="range" min="0" max="10" value="0" oninput="this.nextElementSibling.innerText=this.value">
+<div class="score">0</div>
+</div>
 
-            <div class="pillar-card">
-                <div class="pillar-head">
-                    <div class="pillar-name"><i class="fas fa-users"></i> 2. Clima & Engajamento</div>
-                    <span class="pillar-ref">Ref: Locke (1976)</span>
-                </div>
-                <p class="pillar-desc">
-                    [cite_start]A satisfação é crítica para o desempenho[cite: 243]. Você roda pesquisas de clima periódicas (Pulse) e, mais importante, <strong>age</strong> sobre os resultados?
-                </p>
-                <div class="range-wrap">
-                    <div class="range-labels"><span>Reativo (0)</span> <span>Preventivo (10)</span></div>
-                    <input type="range" min="0" max="10" value="0" class="score-input" oninput="updateVal(this)">
-                    <div class="score-display">0</div>
-                </div>
-            </div>
+<div class="pillar">
+<label>6. Saúde & Bem-Estar</label>
+<input type="range" min="0" max="10" value="0" oninput="this.nextElementSibling.innerText=this.value">
+<div class="score">0</div>
+</div>
 
-            <div class="pillar-card">
-                <div class="pillar-head">
-                    <div class="pillar-name"><i class="fas fa-door-open"></i> 3. Onboarding Humanizado</div>
-                    <span class="pillar-ref">Ref: Bauer (2010)</span>
-                </div>
-                <p class="pillar-desc">
-                    [cite_start]A primeira impressão define a retenção[cite: 120]. Seu onboarding é apenas assinatura de papéis ou existe uma jornada de acolhimento e cultura de 90 dias?
-                </p>
-                <div class="range-wrap">
-                    <div class="range-labels"><span>Burocrático (0)</span> <span>Imersivo (10)</span></div>
-                    <input type="range" min="0" max="10" value="0" class="score-input" oninput="updateVal(this)">
-                    <div class="score-display">0</div>
-                </div>
-            </div>
+<button onclick="gerarResultado()">GERAR DIAGNÓSTICO</button>
+</section>
 
-            <div class="pillar-card">
-                <div class="pillar-head">
-                    <div class="pillar-name"><i class="fas fa-medal"></i> 4. Reconhecimento</div>
-                    <span class="pillar-ref">Ref: Gallup (2017)</span>
-                </div>
-                <p class="pillar-desc">
-                    Não é apenas salário. [cite_start]Equipes reconhecidas têm menos absenteísmo[cite: 177]. Sua empresa tem rituais de celebração de vitórias e feedback positivo?
-                </p>
-                <div class="range-wrap">
-                    <div class="range-labels"><span>Raro (0)</span> <span>Cultura Diária (10)</span></div>
-                    <input type="range" min="0" max="10" value="0" class="score-input" oninput="updateVal(this)">
-                    <div class="score-display">0</div>
-                </div>
-            </div>
+<section id="result">
+<h2 style="text-align:center;">Resultado Executivo</h2>
 
-            <div class="pillar-card">
-                <div class="pillar-head">
-                    <div class="pillar-name"><i class="fas fa-graduation-cap"></i> 5. Treinamento (T&D)</div>
-                    <span class="pillar-ref">Ref: Chiavenato</span>
-                </div>
-                <p class="pillar-desc">
-                    [cite_start]Desenvolvimento humano é vantagem competitiva[cite: 221]. O colaborador sente que está evoluindo ou estagnado? Existem trilhas de aprendizado?
-                </p>
-                <div class="range-wrap">
-                    <div class="range-labels"><span>Estagnado (0)</span> <span>Inovador (10)</span></div>
-                    <input type="range" min="0" max="10" value="0" class="score-input" oninput="updateVal(this)">
-                    <div class="score-display">0</div>
-                </div>
-            </div>
+<h1 id="percentual" style="text-align:center;font-size:3rem;"></h1>
 
-            <div class="pillar-card">
-                <div class="pillar-head">
-                    <div class="pillar-name"><i class="fas fa-heartbeat"></i> 6. Saúde e Bem-Estar</div>
-                    <span class="pillar-ref">Ref: OIT (2022)</span>
-                </div>
-                <p class="pillar-desc">
-                    [cite_start]Empresas saudáveis produzem 20% mais[cite: 199]. Ações como Janeiro Branco e segurança psicológica são genuínas ou apenas cumprimento de tabela?
-                </p>
-                <div class="range-wrap">
-                    <div class="range-labels"><span>Legalista (0)</span> <span>Genuíno (10)</span></div>
-                    <input type="range" min="0" max="10" value="0" class="score-input" oninput="updateVal(this)">
-                    <div class="score-display">0</div>
-                </div>
-            </div>
+<div class="result-box" id="leitura"></div>
 
-            <div style="text-align:center; margin-top:40px;">
-                <button class="btn-unlock btn-action" onclick="calcResult()" style="width:100%; max-width:400px; font-size:1.1rem; padding:20px;">
-                    GERAR DIAGNÓSTICO COMPLETO
-                </button>
-            </div>
-        </div>
+<canvas id="radarChart"></canvas>
 
-        <div id="result-area">
-            <h3 style="color:#94a3b8; text-transform:uppercase; letter-spacing:2px; margin-bottom:20px;">Índice de Maturidade Endomarketing</h3>
-            <div class="result-circle" id="final-score">0%</div>
-            <h2 id="result-title" style="color:white; margin-bottom:10px;">Calculando...</h2>
-            
-            <div class="diagnosis-box">
-                <h3 id="plan-name">Recomendação Estratégica</h3>
-                <div id="plan-content">
-                    </div>
-            </div>
+<button class="btn-pdf" onclick="gerarPDF()">GERAR PDF EXECUTIVO</button>
+</section>
 
-            <div class="cta-box">
-                <h3 style="color:var(--navy); margin-bottom:10px;">Podemos te ajudar a implementar isso.</h3>
-                <p style="color:#64748b; margin-bottom:20px;">
-                    O diagnóstico aponta o problema, mas a solução exige método. A Crescenza possui planos estruturados (90°, 180° e 360°) para transformar esses números em cultura real.
-                </p>
-                <a href="https://wa.me/55996842002?text=Olá,%20fiz%20o%20diagnóstico%20de%20endomarketing%20e%20quero%20discutir%20meu%20resultado." class="btn-whatsapp" target="_blank">
-                    <i class="fab fa-whatsapp" style="font-size:1.2rem;"></i> Falar com um Especialista
-                </a>
-            </div>
+</div>
 
-            <button onclick="window.print()" style="background:transparent; border:1px solid white; color:white; padding:10px 20px; border-radius:50px; margin-top:30px; cursor:pointer;">
-                <i class="fas fa-print"></i> Salvar Relatório PDF
-            </button>
-        </div>
+<script>
+let radar;
 
-    </div>
+function gerarResultado(){
+const sliders=document.querySelectorAll('input[type=range]');
+const pesos=[0.20,0.20,0.15,0.15,0.15,0.15];
+let total=0;
+let valores=[];
 
-    <script>
-        // SENHA SEGURA
-        const PASSWORD = "ENDOMARKETINGCRESCENZA";
+sliders.forEach((s,i)=>{
+const nota=parseInt(s.value);
+valores.push(nota);
+total+=(nota/10)*pesos[i]*100;
+});
 
-        function checkEnter(e) {
-            if(e.key === "Enter") unlock();
-        }
+const percent=Math.round(total);
+document.getElementById('percentual').innerText=percent+"%";
+document.getElementById('result').style.display="block";
 
-        function unlock() {
-            const input = document.getElementById('password').value.trim().toUpperCase();
-            if(input === PASSWORD) {
-                document.getElementById('lock-screen').style.display = 'none';
-                document.getElementById('main-app').style.display = 'block';
-                window.scrollTo(0,0);
-            } else {
-                document.getElementById('error-msg').style.display = 'block';
-            }
-        }
+let leitura="";
+if(percent<45){
+leitura=`<h3>Maturidade Crítica</h3>
+<p>A cultura não sustenta engajamento. O risco de turnover é elevado e a comunicação é reativa.</p>
+<p><strong>Plano indicado:</strong> Crescenza 90°</p>`;
+}else if(percent<75){
+leitura=`<h3>Maturidade em Desenvolvimento</h3>
+<p>Existem boas práticas, mas ainda sem consistência cultural e rotina estruturada.</p>
+<p><strong>Plano indicado:</strong> Crescenza 180°</p>`;
+}else{
+leitura=`<h3>Alta Maturidade Cultural</h3>
+<p>A empresa possui cultura viva, engajamento e base sólida para employer branding.</p>
+<p><strong>Plano indicado:</strong> Crescenza 360°</p>`;
+}
 
-        function updateVal(el) {
-            el.nextElementSibling.innerText = el.value;
-        }
+document.getElementById('leitura').innerHTML=leitura;
+gerarRadar(valores);
+}
 
-        function calcResult() {
-            const inputs = document.querySelectorAll('.score-input');
-            let total = 0;
-            inputs.forEach(i => total += parseInt(i.value));
-            
-            const percent = Math.round((total / 60) * 100);
-            const scoreDisplay = document.getElementById('final-score');
-            const titleDisplay = document.getElementById('result-title');
-            const nameDisplay = document.getElementById('plan-name');
-            const contentDisplay = document.getElementById('plan-content');
+function gerarRadar(valores){
+const ctx=document.getElementById('radarChart');
+if(radar) radar.destroy();
 
-            scoreDisplay.innerText = percent + "%";
-            document.getElementById('result-area').style.display = 'block';
+radar=new Chart(ctx,{
+type:'radar',
+data:{
+labels:[
+'Comunicação',
+'Clima',
+'Onboarding',
+'Reconhecimento',
+'T&D',
+'Bem-estar'
+],
+datasets:[{
+label:'Maturidade',
+data:valores,
+backgroundColor:'rgba(230,81,0,.2)',
+borderColor:'#e65100',
+borderWidth:2
+}]
+},
+options:{
+scales:{
+r:{
+min:0,
+max:10,
+ticks:{stepSize:2}
+}
+}
+});
+}
 
-            [cite_start]// LÓGICA DE DIAGNÓSTICO E PLANOS CRESCENZA [cite: 135-141]
-            if (percent < 45) {
-                // Nível Básico
-                scoreDisplay.style.borderColor = "#ef4444";
-                titleDisplay.innerText = "Alerta: Risco de Turnover";
-                nameDisplay.innerText = "Plano Recomendado: Crescenza 90° (Estruturação)";
-                contentDisplay.innerHTML = `
-                    <p>Sua empresa possui processos, mas falta conexão humana ("Salário Emocional" baixo). O foco imediato deve ser o básico bem feito.</p>
-                    <ul style="color:#cbd5e1; padding-left:20px; line-height:1.8;">
-                        <li><strong>Diagnóstico:</strong> Comunicação ruidosa e onboarding frágil.</li>
-                        <li><strong>O que fazer:</strong> Implementar canais oficiais e um Kit de Boas-Vindas estruturado.</li>
-                        <li><strong>Meta:</strong> Reduzir a "rádio peão" e garantir que o novo colaborador se sinta acolhido nos primeiros 30 dias.</li>
-                    </ul>`;
-            } else if (percent < 75) {
-                // Nível Intermediário
-                scoreDisplay.style.borderColor = "#f59e0b";
-                titleDisplay.innerText = "Em Desenvolvimento";
-                nameDisplay.innerText = "Plano Recomendado: Crescenza 180° (Consistência)";
-                contentDisplay.innerHTML = `
-                    <p>Existem boas práticas, mas elas são vistas como "eventos isolados" e não como cultura. O desafio é a rotina.</p>
-                    <ul style="color:#cbd5e1; padding-left:20px; line-height:1.8;">
-                        <li><strong>Diagnóstico:</strong> Ações acontecem, mas sem calendário fixo ou medição de impacto.</li>
-                        <li><strong>O que fazer:</strong> Calendário Anual de Endomarketing e Pesquisas de Clima regulares.</li>
-                        <li><strong>Meta:</strong> Transformar ações esporádicas em rituais de cultura previsíveis.</li>
-                    </ul>`;
-            } else {
-                // Nível Avançado
-                scoreDisplay.style.borderColor = "#10b981";
-                titleDisplay.innerText = "Excelência Cultural";
-                nameDisplay.innerText = "Plano Recomendado: Crescenza 360° (Expansão)";
-                contentDisplay.innerHTML = `
-                    <p>Sua cultura é forte. O desafio agora é inovação e Employer Branding (marca empregadora) para atrair os melhores.</p>
-                    <ul style="color:#cbd5e1; padding-left:20px; line-height:1.8;">
-                        <li><strong>Diagnóstico:</strong> Equipe engajada, exige desafios maiores.</li>
-                        <li><strong>O que fazer:</strong> Universidade Corporativa, Trilhas de Carreira e Programa de Embaixadores.</li>
-                        <li><strong>Meta:</strong> Transformar colaboradores em defensores da marca e referências no mercado.</li>
-                    </ul>`;
-            }
+function gerarPDF(){
+const { jsPDF } = window.jspdf;
+const doc=new jsPDF();
 
-            document.getElementById('result-area').scrollIntoView({ behavior: 'smooth' });
-        }
-    </script>
+doc.setFontSize(18);
+doc.text("Diagnóstico de Endomarketing – Crescenza",10,20);
+
+doc.setFontSize(14);
+doc.text("Resultado Geral:",10,40);
+doc.text(document.getElementById('percentual').innerText,10,50);
+
+doc.setFontSize(12);
+doc.text("Leitura Executiva:",10,70);
+
+const texto=document.getElementById('leitura').innerText;
+doc.text(texto,10,80,{maxWidth:180});
+
+doc.save("Diagnostico_Endomarketing_Crescenza.pdf");
+}
+</script>
+
 </body>
 </html>
