@@ -33,6 +33,7 @@
 
         h1, h2, h3, h4 { font-family: 'Playfair Display', serif; color: var(--navy); }
         strong { color: var(--brand); font-weight: 700; }
+        a { text-decoration: none; transition: 0.3s; }
 
         /* --- TELA DE BLOQUEIO (MODAL) --- */
         #lock-screen {
@@ -49,8 +50,13 @@
             width: 90%; max-width: 400px; backdrop-filter: blur(10px);
         }
         
-        .lock-logo { font-size: 2rem; color: var(--brand); font-weight: 800; letter-spacing: 2px; margin-bottom: 5px; font-family: 'Playfair Display', serif; }
-        .lock-text { color: #94a3b8; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 30px; }
+        .lock-logo { 
+            font-size: 2rem; color: var(--brand); font-weight: 800; letter-spacing: 2px; 
+            margin-bottom: 5px; font-family: 'Playfair Display', serif; display: block;
+        }
+        .lock-text { color: #94a3b8; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
+        .insta-ref { color: white; font-size: 0.9rem; margin-bottom: 30px; display: block; opacity: 0.8; }
+        .insta-ref:hover { color: var(--brand); opacity: 1; }
         
         .input-pass {
             width: 100%; padding: 15px; background: rgba(0,0,0,0.3); border: 1px solid #475569;
@@ -77,6 +83,8 @@
         .tagline { color: var(--brand); font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; display: block; margin-bottom: 15px; }
         header h1 { color: white; font-size: 3rem; line-height: 1.2; margin-bottom: 20px; }
         header p { color: #cbd5e1; font-size: 1.1rem; max-width: 600px; margin: 0 auto; font-weight: 300; }
+        .header-insta { display: inline-block; margin-top: 20px; color: rgba(255,255,255,0.6); font-size: 0.9rem; border: 1px solid rgba(255,255,255,0.2); padding: 5px 15px; border-radius: 20px; }
+        .header-insta:hover { background: white; color: var(--navy); }
 
         /* SEÇÃO EDUCACIONAL (ORIENTATIVO) */
         .edu-section { padding: 60px 40px; }
@@ -155,7 +163,7 @@
 
         /* IMPRESSÃO */
         @media print {
-            #lock-screen, .btn-action, .btn-whatsapp { display: none !important; }
+            #lock-screen, .btn-action, .btn-whatsapp, .header-insta { display: none !important; }
             body { background: white; color: black; }
             .container { box-shadow: none; max-width: 100%; }
             header { background: white !important; color: black !important; border-bottom: 2px solid black; }
@@ -171,8 +179,13 @@
 
     <div id="lock-screen">
         <div class="lock-card">
-            <div class="lock-logo">CRESCENZA</div>
+            <a href="https://www.crescenzaonline.com/" target="_blank" class="lock-logo">CRESCENZA</a>
             <div class="lock-text">Ferramenta Exclusiva de Diagnóstico</div>
+            
+            <a href="https://www.instagram.com/idionaraprass" target="_blank" class="insta-ref">
+                <i class="fab fa-instagram"></i> @IDIONARAPRASS
+            </a>
+
             <input type="password" id="password" class="input-pass" placeholder="DIGITE A SENHA" onkeypress="checkEnter(event)">
             <button class="btn-unlock" onclick="unlock()">Desbloquear Acesso</button>
             <div id="error-msg" style="color:#ef4444; margin-top:15px; display:none; font-weight:bold; font-size:0.9rem;">Senha Incorreta</div>
@@ -185,12 +198,16 @@
             <span class="tagline">Consultoria & Gestão Estratégica</span>
             <h1>Endomarketing Premium</h1>
             <p>Diagnóstico de maturidade cultural, engajamento e retenção de talentos baseado em dados.</p>
+            
+            <a href="https://www.instagram.com/idionaraprass" target="_blank" class="header-insta">
+                <i class="fab fa-instagram"></i> Siga @IDIONARAPRASS
+            </a>
         </header>
 
         <div class="edu-section">
             <div class="concept-box">
                 <p class="concept-quote">"Empresas são feitas de processos, mas movidas por pessoas. O crachá organiza, o propósito mobiliza."</p>
-                [cite_start]<span class="concept-source">DNA Crescenza [cite: 16]</span>
+                <span class="concept-source">DNA Crescenza</span>
             </div>
 
             <p style="text-align:center; max-width:800px; margin:0 auto; color:#475569;">
@@ -200,11 +217,11 @@
             <div class="edu-grid">
                 <div class="edu-card">
                     <h3><i class="fas fa-bullhorn" style="color:var(--brand);"></i> Comunicação Interna</h3>
-                    <p>Foca no "O QUE". Transmite informações, avisos e regras. [cite_start]É operacional e necessária, mas sozinha não gera vínculo emocional. [cite: 53]</p>
+                    <p>Foca no "O QUE". Transmite informações, avisos e regras. É operacional e necessária, mas sozinha não gera vínculo emocional.</p>
                 </div>
                 <div class="edu-card">
                     <h3><i class="fas fa-heart" style="color:var(--brand);"></i> Endomarketing</h3>
-                    <p>Foca no "PORQUÊ". Segundo Saul Bekin, é tratar o colaborador como cliente. [cite_start]Transforma informação em pertencimento, engajamento e cultura. [cite: 54-56]</p>
+                    <p>Foca no "PORQUÊ". Segundo Saul Bekin, é tratar o colaborador como cliente. Transforma informação em pertencimento, engajamento e cultura.</p>
                 </div>
             </div>
         </div>
@@ -221,7 +238,7 @@
                     <span class="pillar-ref">Ref: Saul Bekin</span>
                 </div>
                 <p class="pillar-desc">
-                    Sua comunicação apenas "avisa" (mural frio) ou "vende" a empresa para o funcionário? [cite_start]O objetivo é reduzir a "rádio peão" e alinhar discurso e prática[cite: 151].
+                    Sua comunicação apenas "avisa" (mural frio) ou "vende" a empresa para o funcionário? O objetivo é reduzir a "rádio peão" e alinhar discurso e prática.
                 </p>
                 <div class="range-wrap">
                     <div class="range-labels"><span>Inexistente (0)</span> <span>Estratégica (10)</span></div>
@@ -236,7 +253,7 @@
                     <span class="pillar-ref">Ref: Locke (1976)</span>
                 </div>
                 <p class="pillar-desc">
-                    [cite_start]A satisfação é crítica para o desempenho[cite: 243]. Você roda pesquisas de clima periódicas (Pulse) e, mais importante, <strong>age</strong> sobre os resultados?
+                    A satisfação é crítica para o desempenho. Você roda pesquisas de clima periódicas (Pulse) e, mais importante, <strong>age</strong> sobre os resultados?
                 </p>
                 <div class="range-wrap">
                     <div class="range-labels"><span>Reativo (0)</span> <span>Preventivo (10)</span></div>
@@ -251,7 +268,7 @@
                     <span class="pillar-ref">Ref: Bauer (2010)</span>
                 </div>
                 <p class="pillar-desc">
-                    [cite_start]A primeira impressão define a retenção[cite: 120]. Seu onboarding é apenas assinatura de papéis ou existe uma jornada de acolhimento e cultura de 90 dias?
+                    A primeira impressão define a retenção. Seu onboarding é apenas assinatura de papéis ou existe uma jornada de acolhimento e cultura de 90 dias?
                 </p>
                 <div class="range-wrap">
                     <div class="range-labels"><span>Burocrático (0)</span> <span>Imersivo (10)</span></div>
@@ -266,7 +283,7 @@
                     <span class="pillar-ref">Ref: Gallup (2017)</span>
                 </div>
                 <p class="pillar-desc">
-                    Não é apenas salário. [cite_start]Equipes reconhecidas têm menos absenteísmo[cite: 177]. Sua empresa tem rituais de celebração de vitórias e feedback positivo?
+                    Não é apenas salário. Equipes reconhecidas têm menos absenteísmo. Sua empresa tem rituais de celebração de vitórias e feedback positivo?
                 </p>
                 <div class="range-wrap">
                     <div class="range-labels"><span>Raro (0)</span> <span>Cultura Diária (10)</span></div>
@@ -281,7 +298,7 @@
                     <span class="pillar-ref">Ref: Chiavenato</span>
                 </div>
                 <p class="pillar-desc">
-                    [cite_start]Desenvolvimento humano é vantagem competitiva[cite: 221]. O colaborador sente que está evoluindo ou estagnado? Existem trilhas de aprendizado?
+                    Desenvolvimento humano é vantagem competitiva. O colaborador sente que está evoluindo ou estagnado? Existem trilhas de aprendizado?
                 </p>
                 <div class="range-wrap">
                     <div class="range-labels"><span>Estagnado (0)</span> <span>Inovador (10)</span></div>
@@ -296,7 +313,7 @@
                     <span class="pillar-ref">Ref: OIT (2022)</span>
                 </div>
                 <p class="pillar-desc">
-                    [cite_start]Empresas saudáveis produzem 20% mais[cite: 199]. Ações como Janeiro Branco e segurança psicológica são genuínas ou apenas cumprimento de tabela?
+                    Empresas saudáveis produzem 20% mais. Ações como Janeiro Branco e segurança psicológica são genuínas ou apenas cumprimento de tabela?
                 </p>
                 <div class="range-wrap">
                     <div class="range-labels"><span>Legalista (0)</span> <span>Genuíno (10)</span></div>
@@ -320,7 +337,7 @@
             <div class="diagnosis-box">
                 <h3 id="plan-name">Recomendação Estratégica</h3>
                 <div id="plan-content">
-                    </div>
+                </div>
             </div>
 
             <div class="cta-box">
@@ -328,9 +345,16 @@
                 <p style="color:#64748b; margin-bottom:20px;">
                     O diagnóstico aponta o problema, mas a solução exige método. A Crescenza possui planos estruturados (90°, 180° e 360°) para transformar esses números em cultura real.
                 </p>
+                
                 <a href="https://wa.me/55996842002?text=Olá,%20fiz%20o%20diagnóstico%20de%20endomarketing%20e%20quero%20discutir%20meu%20resultado." class="btn-whatsapp" target="_blank">
                     <i class="fab fa-whatsapp" style="font-size:1.2rem;"></i> Falar com um Especialista
                 </a>
+                
+                <div style="margin-top: 20px; font-size: 0.9rem;">
+                    <a href="https://www.instagram.com/idionaraprass" target="_blank" style="color: var(--navy); text-decoration: none;">
+                        <i class="fab fa-instagram"></i> Acompanhe <strong>@IDIONARAPRASS</strong>
+                    </a>
+                </div>
             </div>
 
             <button onclick="window.print()" style="background:transparent; border:1px solid white; color:white; padding:10px 20px; border-radius:50px; margin-top:30px; cursor:pointer;">
@@ -341,8 +365,8 @@
     </div>
 
     <script>
-        // SENHA SEGURA
-        const PASSWORD = "ENDOMARKETINGCRESCENZA";
+        // SENHA ATUALIZADA
+        const PASSWORD = "ENDOMARKETINGPREMIUMCRESCENZA";
 
         function checkEnter(e) {
             if(e.key === "Enter") unlock();
@@ -377,7 +401,7 @@
             scoreDisplay.innerText = percent + "%";
             document.getElementById('result-area').style.display = 'block';
 
-            [cite_start]// LÓGICA DE DIAGNÓSTICO E PLANOS CRESCENZA [cite: 135-141]
+            // LÓGICA DE DIAGNÓSTICO E PLANOS CRESCENZA
             if (percent < 45) {
                 // Nível Básico
                 scoreDisplay.style.borderColor = "#ef4444";
