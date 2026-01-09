@@ -1,202 +1,614 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<title>Crescenza | Diagnóstico Estratégico de Endomarketing</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crescenza | Diagnóstico Estratégico de Endomarketing</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        :root {
+            --primary: #e65100; /* Laranja Crescenza */
+            --primary-hover: #bf360c;
+            --dark: #1f2933;
+            --gray: #616e7c;
+            --light: #f5f7fa;
+            --white: #ffffff;
+            --shadow: 0 10px 30px rgba(0,0,0,0.08);
+            --radius: 12px;
+        }
 
-<style>
-body{
-font-family:Arial, Helvetica, sans-serif;
-background:#f4f6f8;
-margin:0;
-color:#1f2933;
-}
+        * { box-sizing: border-box; }
 
-.hidden{display:none;}
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: var(--light);
+            margin: 0;
+            color: var(--dark);
+            line-height: 1.6;
+        }
 
-.container{
-max-width:900px;
-margin:auto;
-background:#fff;
-padding:40px;
-}
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--dark);
+            margin-top: 0;
+        }
 
-h1,h2,h3{
-color:#0f172a;
-}
+        .hidden { display: none !important; }
+        .fade-in { animation: fadeIn 0.8s ease-in-out; }
 
-p{
-line-height:1.7;
-margin-bottom:16px;
-}
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-.section{
-margin-bottom:60px;
-}
+        /* Container Principal */
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            background: var(--white);
+            padding: 60px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
 
-.pillar{
-border-left:4px solid #e65100;
-padding-left:20px;
-margin-bottom:40px;
-}
+        /* Login Screen */
+        #login-screen {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #fff3e0 0%, #ffffff 100%);
+        }
 
-input[type=range]{
-width:100%;
-}
+        .login-box {
+            background: var(--white);
+            padding: 50px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+            max-width: 450px;
+            width: 90%;
+            border-top: 6px solid var(--primary);
+        }
 
-button{
-padding:14px 20px;
-border:none;
-background:#e65100;
-color:#fff;
-font-size:1rem;
-cursor:pointer;
-margin-top:20px;
-}
+        input[type="password"] {
+            width: 100%;
+            padding: 15px;
+            margin: 20px 0;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
 
-#login{
-max-width:400px;
-margin:100px auto;
-background:#fff;
-padding:40px;
-text-align:center;
-box-shadow:0 0 20px rgba(0,0,0,.1);
-}
-</style>
+        input[type="password"]:focus {
+            border-color: var(--primary);
+        }
+
+        /* Botões */
+        .btn {
+            padding: 16px 32px;
+            border: none;
+            background: var(--primary);
+            color: var(--white);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: background 0.3s, transform 0.2s;
+            width: 100%;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            margin-top: 10px;
+        }
+        .btn-outline:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        /* Seções de Conteúdo */
+        .header-brand {
+            text-align: center;
+            margin-bottom: 50px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+        }
+
+        .header-brand h1 {
+            font-size: 2.5rem;
+            letter-spacing: -1px;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .header-brand span {
+            font-size: 0.9rem;
+            color: var(--gray);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .manifesto-box {
+            background: #fff3e0;
+            padding: 30px;
+            border-left: 5px solid var(--primary);
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 50px;
+        }
+
+        .pillar-card {
+            background: #fff;
+            border: 1px solid #eee;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            transition: box-shadow 0.3s;
+        }
+
+        .pillar-card:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-color: var(--primary);
+        }
+
+        /* Range Slider Customizado */
+        .range-container {
+            margin-top: 20px;
+        }
+
+        .range-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        input[type=range] {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 8px;
+            border-radius: 5px;
+            background: #ddd;
+            outline: none;
+        }
+
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--primary);
+            cursor: pointer;
+            border: 4px solid #fff;
+            box-shadow: 0 0 5px rgba(0,0,0,0.2);
+        }
+
+        /* Resultados */
+        .result-dashboard {
+            text-align: center;
+            background: var(--dark);
+            color: var(--white);
+            padding: 40px;
+            border-radius: var(--radius);
+            margin-bottom: 40px;
+        }
+        
+        .result-dashboard h2 { color: var(--white); }
+
+        .score-big {
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--primary);
+            line-height: 1;
+        }
+
+        .level-text {
+            font-size: 1.5rem;
+            font-weight: 300;
+            margin-top: 10px;
+            letter-spacing: 1px;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 400px;
+            width: 100%;
+            margin: 40px auto;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            font-size: 0.9rem;
+            color: var(--gray);
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+        
+        .footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* Responsividade */
+        @media (max-width: 600px) {
+            .container { padding: 30px 20px; width: 95%; }
+            .header-brand h1 { font-size: 2rem; }
+            .score-big { font-size: 3rem; }
+        }
+    </style>
 </head>
 
 <body>
 
-<!-- LOGIN -->
-<div id="login">
-<h2>Acesso Restrito</h2>
-<p>Este material faz parte de uma metodologia exclusiva Crescenza.</p>
-<input type="password" id="senha" placeholder="Digite a senha">
-<br><br>
-<button onclick="acessar()">Acessar</button>
-<p id="erro" style="color:red;"></p>
-</div>
+    <div id="login-screen">
+        <div class="login-box fade-in">
+            <div style="margin-bottom: 20px;">
+                <h2 style="color:var(--primary); margin-bottom:5px;">CRESCENZA</h2>
+                <span style="font-size:0.8rem; text-transform:uppercase; color:#888;">Executive Intelligence</span>
+            </div>
+            <h3>Acesso Exclusivo</h3>
+            <p style="font-size:0.9rem; color:#666;">Digite a credencial Premium para acessar o diagnóstico de cultura organizacional.</p>
+            
+            <input type="password" id="senhaInput" placeholder="Insira sua chave de acesso...">
+            <button class="btn" onclick="verificarAcesso()">ACESSAR SISTEMA</button>
+            <p id="msgErro" style="color: #d32f2f; font-size: 0.9rem; margin-top: 10px; min-height: 20px;"></p>
+        </div>
+    </div>
 
-<!-- CONTEÚDO -->
-<div id="conteudo" class="hidden">
-<div class="container">
+    <div id="app-content" class="hidden">
+        <div class="container fade-in">
+            
+            <div class="header-brand">
+                <h1>CRESCENZA</h1>
+                <span>Inteligência em Endomarketing</span>
+            </div>
 
-<!-- MANIFESTO -->
-<div class="section">
-<h1>Crescenza</h1>
-<p><strong>Crescenza</strong> nasce da compreensão de que empresas crescem quando pessoas crescem.</p>
-<p>Não falamos de ações isoladas, campanhas pontuais ou datas comemorativas. Falamos de <strong>cultura viva</strong>, construída no cotidiano, nas decisões, na comunicação e na forma como cada colaborador se sente pertencente.</p>
-<p>Este material não é um teste. É uma <strong>experiência de consciência organizacional</strong>.</p>
-</div>
+            <div class="section">
+                <div class="manifesto-box">
+                    <h3>Manifesto da Cultura Viva</h3>
+                    <p>A <strong>Crescenza</strong> nasce da compreensão visceral de que empresas só crescem quando as pessoas crescem. Não falamos de ações isoladas ou datas comemorativas no calendário.</p>
+                    <p>Falamos de <strong>cultura viva</strong>. Aquela construída no cotidiano, nas micro-decisões, na comunicação transparente e na forma como cada colaborador se sente pertencente ao todo.</p>
+                    <p><em>"Este material não é apenas um teste. É um espelho da sua consciência organizacional."</em> — <strong>Idionara Prass</strong></p>
+                </div>
+            </div>
 
-<!-- SOBRE O TRABALHO -->
-<div class="section">
-<h2>Sobre a Metodologia</h2>
-<p>Meu trabalho une estratégia, gestão de pessoas e leitura profunda de cultura organizacional.</p>
-<p>Antes de medir, eu ensino. Antes de recomendar, eu contextualizo. Porque diagnóstico sem compreensão gera resistência — não mudança.</p>
-</div>
+            <div class="section" style="margin-bottom: 40px;">
+                <h2>Diagnóstico de Maturidade</h2>
+                <p>Avalie sua organização nos 6 pilares essenciais abaixo. Seja honesto(a): o diagnóstico serve para iluminar pontos cegos, não para julgar.</p>
+                <p style="font-size: 0.9rem; color: var(--gray);"><strong>Escala:</strong> 0 (Inexistente/Crítico) a 10 (Excelência/Referência)</p>
+            </div>
 
-<!-- DIAGNÓSTICO -->
-<div class="section">
-<h2>Diagnóstico de Maturidade em Endomarketing</h2>
-<p>A seguir, você avaliará seis pilares essenciais. Leia com atenção cada explicação antes de responder.</p>
+            <div id="quiz-form">
+                <div class="pillar-card">
+                    <h3>1. Comunicação com Propósito</h3>
+                    <p>Não é sobre informar, é sobre gerar sentido. A comunicação conecta a estratégia à operação?</p>
+                    <div class="range-container">
+                        <div class="range-header">
+                            <span>Nota</span>
+                            <span id="val-0">0</span>
+                        </div>
+                        <input type="range" min="0" max="10" value="0" step="1" oninput="atualizarValor(0, this.value)">
+                    </div>
+                </div>
 
-<div class="pillar">
-<h3>1. Comunicação com Propósito</h3>
-<p>Não é sobre informar. É sobre gerar sentido. Comunicação com propósito conecta estratégia, cultura e pessoas.</p>
-<input type="range" min="0" max="10" value="0">
-</div>
+                <div class="pillar-card">
+                    <h3>2. Clima & Engajamento</h3>
+                    <p>O engajamento nasce da coerência entre discurso e prática. As pessoas recomendariam sua empresa?</p>
+                    <div class="range-container">
+                        <div class="range-header">
+                            <span>Nota</span>
+                            <span id="val-1">0</span>
+                        </div>
+                        <input type="range" min="0" max="10" value="0" step="1" oninput="atualizarValor(1, this.value)">
+                    </div>
+                </div>
 
-<div class="pillar">
-<h3>2. Clima & Engajamento</h3>
-<p>Engajamento não se exige, se constrói. Ele nasce da coerência entre discurso e prática.</p>
-<input type="range" min="0" max="10" value="0">
-</div>
+                <div class="pillar-card">
+                    <h3>3. Onboarding Humanizado</h3>
+                    <p>A forma como alguém entra define quanto tempo ele fica. O onboarding gera vínculo ou apenas burocracia?</p>
+                    <div class="range-container">
+                        <div class="range-header">
+                            <span>Nota</span>
+                            <span id="val-2">0</span>
+                        </div>
+                        <input type="range" min="0" max="10" value="0" step="1" oninput="atualizarValor(2, this.value)">
+                    </div>
+                </div>
 
-<div class="pillar">
-<h3>3. Onboarding Humanizado</h3>
-<p>A forma como alguém entra define o quanto ele ficará. Onboarding é vínculo, não checklist.</p>
-<input type="range" min="0" max="10" value="0">
-</div>
+                <div class="pillar-card">
+                    <h3>4. Reconhecimento & Valorização</h3>
+                    <p>Pessoas que não se sentem vistas, silenciosamente se desligam. Existe cultura de feedback e celebração?</p>
+                    <div class="range-container">
+                        <div class="range-header">
+                            <span>Nota</span>
+                            <span id="val-3">0</span>
+                        </div>
+                        <input type="range" min="0" max="10" value="0" step="1" oninput="atualizarValor(3, this.value)">
+                    </div>
+                </div>
 
-<div class="pillar">
-<h3>4. Reconhecimento & Valorização</h3>
-<p>Pessoas que não se sentem vistas, silenciosamente se desligam — mesmo permanecendo.</p>
-<input type="range" min="0" max="10" value="0">
-</div>
+                <div class="pillar-card">
+                    <h3>5. Treinamento & Desenvolvimento</h3>
+                    <p>Desenvolver não é apenas treinar para a função atual, é preparar o indivíduo para o futuro.</p>
+                    <div class="range-container">
+                        <div class="range-header">
+                            <span>Nota</span>
+                            <span id="val-4">0</span>
+                        </div>
+                        <input type="range" min="0" max="10" value="0" step="1" oninput="atualizarValor(4, this.value)">
+                    </div>
+                </div>
 
-<div class="pillar">
-<h3>5. Treinamento & Desenvolvimento</h3>
-<p>Desenvolver não é treinar para a função apenas, é preparar para o futuro.</p>
-<input type="range" min="0" max="10" value="0">
-</div>
+                <div class="pillar-card">
+                    <h3>6. Saúde & Bem-Estar</h3>
+                    <p>Produtividade sustentável exige saúde emocional. A empresa cuida da saúde integral do time?</p>
+                    <div class="range-container">
+                        <div class="range-header">
+                            <span>Nota</span>
+                            <span id="val-5">0</span>
+                        </div>
+                        <input type="range" min="0" max="10" value="0" step="1" oninput="atualizarValor(5, this.value)">
+                    </div>
+                </div>
 
-<div class="pillar">
-<h3>6. Saúde & Bem-Estar</h3>
-<p>Produtividade sustentável exige saúde emocional, mental e relacional.</p>
-<input type="range" min="0" max="10" value="0">
-</div>
+                <button class="btn" onclick="processarDiagnostico()">GERAR DIAGNÓSTICO EXECUTIVO</button>
+            </div>
 
-<button onclick="gerarResultado()">Gerar Diagnóstico</button>
-</div>
+            <div id="resultado-section" class="hidden fade-in">
+                <hr style="margin: 50px 0; border: 0; border-top: 1px solid #ddd;">
+                
+                <div class="result-dashboard">
+                    <h2>Maturidade em Endomarketing</h2>
+                    <div class="score-big" id="final-score">0%</div>
+                    <div class="level-text" id="final-level">...</div>
+                </div>
 
-<!-- RESULTADO -->
-<div class="section hidden" id="resultado">
-<h2>Resultado Executivo</h2>
-<h1 id="percentual"></h1>
-<div id="leitura"></div>
-<canvas id="radar"></canvas>
-<button onclick="gerarPDF()">Gerar PDF Executivo</button>
-</div>
+                <div class="chart-container">
+                    <canvas id="radarChart"></canvas>
+                </div>
 
-</div>
-</div>
+                <div style="background: #f8f9fa; padding: 25px; border-radius: 8px; margin-bottom: 30px;">
+                    <h3>Análise Preliminar</h3>
+                    <p id="analise-texto">...</p>
+                </div>
 
-<script>
-function acessar(){
-const senha="crescenza360";
-if(document.getElementById("senha").value===senha){
-document.getElementById("login").style.display="none";
-document.getElementById("conteudo").classList.remove("hidden");
-}else{
-document.getElementById("erro").innerText="Senha incorreta.";
-}
-}
+                <button class="btn" onclick="baixarPDF()">BAIXAR RELATÓRIO PDF</button>
+                <button class="btn btn-outline" onclick="location.reload()">NOVO DIAGNÓSTICO</button>
+            </div>
 
-function gerarResultado(){
-const sliders=document.querySelectorAll("input[type=range]");
-const pesos=[0.2,0.2,0.15,0.15,0.15,0.15];
-let total=0;
-let dados=[];
-sliders.forEach((s,i)=>{
-dados.push(Number(s.value));
-total+=(s.value/10)*pesos[i]*100;
-});
-document.getElementById("percentual").innerText=Math.round(total)+"%";
-document.getElementById("resultado").classList.remove("hidden");
+            <div class="footer">
+                <p>&copy; 2026 Crescenza | <a href="https://www.crescenzaonline.com/" target="_blank">www.crescenzaonline.com</a></p>
+                <p>Siga no Instagram: <a href="https://instagram.com/idionaraprass" target="_blank">@IDIONARAPRASS</a></p>
+            </div>
+        </div>
+    </div>
 
-new Chart(document.getElementById("radar"),{
-type:"radar",
-data:{
-labels:["Comunicação","Clima","Onboarding","Reconhecimento","T&D","Bem-estar"],
-datasets:[{data:dados,backgroundColor:"rgba(230,81,0,.3)",borderColor:"#e65100"}]
-},
-options:{scales:{r:{min:0,max:10}}}
-});
-}
+    <script>
+        // CONFIGURAÇÕES
+        const SENHA_CORRETA = "ENDOMARKETINGPREMIUMCRESCENZA";
+        let chartInstance = null;
+        let scores = [0,0,0,0,0,0];
+        const labels = ["Comunicação", "Clima", "Onboarding", "Reconhecimento", "T&D", "Bem-estar"];
 
-function gerarPDF(){
-const {jsPDF}=window.jspdf;
-const doc=new jsPDF();
-doc.text("Diagnóstico Crescenza",10,20);
-doc.text("Resultado: "+document.getElementById("percentual").innerText,10,40);
-doc.save("Diagnostico_Crescenza.pdf");
-}
-</script>
+        // 1. LÓGICA DE LOGIN
+        function verificarAcesso() {
+            const input = document.getElementById("senhaInput").value.trim();
+            const erro = document.getElementById("msgErro");
+            
+            if(input === SENHA_CORRETA) {
+                document.getElementById("login-screen").style.display = "none";
+                document.getElementById("app-content").classList.remove("hidden");
+                window.scrollTo(0,0);
+            } else {
+                erro.innerText = "Credencial inválida. Tente novamente.";
+                // Efeito visual de erro
+                document.querySelector('.login-box').style.animation = "shake 0.5s";
+                setTimeout(() => document.querySelector('.login-box').style.animation = "", 500);
+            }
+        }
 
+        // Permitir Enter no login
+        document.getElementById("senhaInput").addEventListener("keypress", function(e) {
+            if(e.key === 'Enter') verificarAcesso();
+        });
+
+        // 2. INTERATIVIDADE DOS SLIDERS
+        function atualizarValor(index, valor) {
+            document.getElementById(`val-${index}`).innerText = valor;
+            scores[index] = parseInt(valor);
+        }
+
+        // 3. PROCESSAMENTO DO DIAGNÓSTICO
+        function processarDiagnostico() {
+            // Pesos ajustados para dar ênfase (soma = 1)
+            const pesos = [0.20, 0.20, 0.15, 0.15, 0.15, 0.15];
+            
+            let pontuacaoPonderada = 0;
+            scores.forEach((score, i) => {
+                pontuacaoPonderada += (score * pesos[i]); 
+            });
+            
+            // Converter para porcentagem (score máx é 10)
+            const percentualFinal = Math.round(pontuacaoPonderada * 10);
+            
+            // Definir Nível e Texto
+            let nivel = "";
+            let texto = "";
+
+            if(percentualFinal < 40) {
+                nivel = "DESPERTAR CULTURAL";
+                texto = "Sua organização está em estágio inicial. Há muitos processos manuais e desconexão entre estratégia e pessoas. O foco imediato deve ser estruturar a comunicação básica.";
+            } else if (percentualFinal < 70) {
+                nivel = "EM CONSTRUÇÃO";
+                texto = "Existem iniciativas válidas, mas faltam constância e método. O desafio agora é transformar ações pontuais em uma jornada contínua de experiência do colaborador.";
+            } else if (percentualFinal < 90) {
+                nivel = "CONSOLIDADO";
+                texto = "Sua cultura é forte e percebida. O momento pede refinamento: focar em personalização e métricas de impacto para elevar a barra da performance.";
+            } else {
+                nivel = "ALTA PERFORMANCE";
+                texto = "Excelência! A Crescenza existe na sua empresa. O desafio é a manutenção da consistência e a inovação nas práticas humanas para reter talentos globais.";
+            }
+
+            // Renderizar na tela
+            document.getElementById("final-score").innerText = percentualFinal + "%";
+            document.getElementById("final-level").innerText = nivel;
+            document.getElementById("analise-texto").innerText = texto;
+            
+            document.getElementById("resultado-section").classList.remove("hidden");
+            
+            // Scroll suave até o resultado
+            document.getElementById("resultado-section").scrollIntoView({ behavior: 'smooth' });
+
+            renderizarGrafico();
+        }
+
+        // 4. GRÁFICO (CHART.JS)
+        function renderizarGrafico() {
+            const ctx = document.getElementById('radarChart').getContext('2d');
+            
+            if(chartInstance) chartInstance.destroy();
+
+            chartInstance = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Sua Organização',
+                        data: scores,
+                        backgroundColor: 'rgba(230, 81, 0, 0.2)',
+                        borderColor: '#e65100',
+                        pointBackgroundColor: '#e65100',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: '#e65100',
+                        borderWidth: 3
+                    },
+                    {
+                        label: 'Ideal (Meta)',
+                        data: [10, 10, 10, 10, 10, 10],
+                        backgroundColor: 'rgba(200, 200, 200, 0.05)',
+                        borderColor: 'rgba(200, 200, 200, 0.5)',
+                        borderDash: [5, 5],
+                        pointRadius: 0,
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            angleLines: { color: '#eee' },
+                            grid: { color: '#eee' },
+                            pointLabels: {
+                                font: { size: 12, family: 'Montserrat', weight: 'bold' },
+                                color: '#1f2933'
+                            },
+                            suggestedMin: 0,
+                            suggestedMax: 10,
+                            ticks: { display: false } // Esconde os números do eixo radial para limpeza
+                        }
+                    },
+                    plugins: {
+                        legend: { position: 'bottom' }
+                    }
+                }
+            });
+        }
+
+        // 5. GERAÇÃO DE PDF (JSPDF)
+        async function baixarPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            
+            // Cores
+            const primaryColor = "#e65100";
+            const darkColor = "#1f2933";
+
+            // Cabeçalho
+            doc.setFillColor(primaryColor);
+            doc.rect(0, 0, 210, 20, "F");
+            doc.setTextColor("#ffffff");
+            doc.setFont("helvetica", "bold");
+            doc.setFontSize(16);
+            doc.text("CRESCENZA | DIAGNÓSTICO EXECUTIVO", 105, 13, null, null, "center");
+
+            // Info Básica
+            doc.setTextColor(darkColor);
+            doc.setFontSize(12);
+            doc.setFont("helvetica", "normal");
+            doc.text(`Data: ${new Date().toLocaleDateString('pt-BR')}`, 20, 40);
+            doc.text("Consultora: Idionara Prass", 20, 46);
+
+            // Resultado Principal
+            doc.setFontSize(22);
+            doc.setTextColor(primaryColor);
+            doc.text(`Resultado: ${document.getElementById("final-score").innerText}`, 20, 65);
+            
+            doc.setFontSize(14);
+            doc.setTextColor(darkColor);
+            doc.text(`Nível: ${document.getElementById("final-level").innerText}`, 20, 72);
+
+            // Capturar Imagem do Gráfico
+            const canvas = document.getElementById("radarChart");
+            const chartImage = canvas.toDataURL("image/png", 1.0);
+            
+            // Inserir Gráfico centralizado
+            doc.addImage(chartImage, 'PNG', 55, 80, 100, 100);
+
+            // Análise Texto
+            doc.setFontSize(12);
+            doc.setFont("helvetica", "bold");
+            doc.text("Análise Estratégica:", 20, 190);
+            
+            doc.setFont("helvetica", "normal");
+            doc.setFontSize(10);
+            const splitText = doc.splitTextToSize(document.getElementById("analise-texto").innerText, 170);
+            doc.text(splitText, 20, 200);
+
+            // Rodapé
+            doc.setFontSize(8);
+            doc.setTextColor("#999999");
+            doc.text("www.crescenzaonline.com | @IDIONARAPRASS", 105, 280, null, null, "center");
+
+            doc.save("Diagnostico_Crescenza.pdf");
+        }
+
+        // Animação CSS extra
+        const styleSheet = document.createElement("style");
+        styleSheet.innerText = `
+            @keyframes shake {
+                0% { transform: translateX(0); }
+                25% { transform: translateX(-5px); }
+                50% { transform: translateX(5px); }
+                75% { transform: translateX(-5px); }
+                100% { transform: translateX(0); }
+            }
+        `;
+        document.head.appendChild(styleSheet);
+    </script>
 </body>
 </html>
