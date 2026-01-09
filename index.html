@@ -2,251 +2,201 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>Endomarketing Premium | Crescenza</title>
+<title>Crescenza | Diagnóstico Estratégico de Endomarketing</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700&family=Playfair+Display:wght@600;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <style>
-:root{
---brand:#e65100;
---navy:#0f172a;
---text:#334155;
---bg:#f8fafc;
---white:#fff;
+body{
+font-family:Arial, Helvetica, sans-serif;
+background:#f4f6f8;
+margin:0;
+color:#1f2933;
 }
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Manrope',sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
-h1,h2,h3{font-family:'Playfair Display',serif;color:var(--navy)}
-.container{max-width:900px;margin:auto;background:#fff}
-section{padding:70px 50px;border-bottom:1px solid #eee}
-.btn{background:var(--brand);color:#fff;border:none;padding:15px 35px;border-radius:40px;font-weight:700;cursor:pointer}
-.btn:hover{opacity:.9}
 
-/* LOCK */
-#lock{position:fixed;inset:0;background:var(--navy);display:flex;align-items:center;justify-content:center;z-index:10}
-.lock-box{background:#111827;padding:40px;border-radius:12px;text-align:center;width:90%;max-width:420px}
-.lock-box h2{color:#fff;margin-bottom:10px}
-.lock-box p{치{color:#94a3b8;margin-bottom:25px}
-.lock-box input{width:100%;padding:15px;text-align:center;font-size:1rem;margin-bottom:20px}
-#error{color:#ef4444;display:none}
+.hidden{display:none;}
 
-/* NAV */
-.nav{display:flex;justify-content:space-between;align-items:center;background:#020617;color:#fff;padding:20px 40px}
-.nav span{font-weight:800;letter-spacing:2px}
+.container{
+max-width:900px;
+margin:auto;
+background:#fff;
+padding:40px;
+}
 
-/* SLIDES */
-.slide{display:none}
-.slide.active{display:block}
+h1,h2,h3{
+color:#0f172a;
+}
 
-/* PILLARS */
-.pillar{margin-bottom:40px}
-.range{width:100%}
-.score{font-weight:700;color:var(--brand)}
+p{
+line-height:1.7;
+margin-bottom:16px;
+}
 
-/* RESULT */
-#result{display:none;background:#020617;color:#fff}
-canvas{max-width:100%}
-.cta{background:#fff;color:#020617;padding:40px;border-radius:12px;margin-top:40px}
+.section{
+margin-bottom:60px;
+}
+
+.pillar{
+border-left:4px solid #e65100;
+padding-left:20px;
+margin-bottom:40px;
+}
+
+input[type=range]{
+width:100%;
+}
+
+button{
+padding:14px 20px;
+border:none;
+background:#e65100;
+color:#fff;
+font-size:1rem;
+cursor:pointer;
+margin-top:20px;
+}
+
+#login{
+max-width:400px;
+margin:100px auto;
+background:#fff;
+padding:40px;
+text-align:center;
+box-shadow:0 0 20px rgba(0,0,0,.1);
+}
 </style>
 </head>
 
 <body>
 
-<!-- LOCK -->
-<div id="lock">
-<div class="lock-box">
-<h2>CRESCENZA</h2>
-<p>Diagnóstico Premium de Endomarketing</p>
-<input type="password" id="pass" placeholder="SENHA DE ACESSO">
-<button class="btn" onclick="unlock()">Acessar</button>
-<p id="error">Senha incorreta</p>
-</div>
-</div>
-
-<div class="container" id="app" style="display:none">
-
-<div class="nav">
-<span>CRESCENZA</span>
-<span>@idionaraprass</span>
+<!-- LOGIN -->
+<div id="login">
+<h2>Acesso Restrito</h2>
+<p>Este material faz parte de uma metodologia exclusiva Crescenza.</p>
+<input type="password" id="senha" placeholder="Digite a senha">
+<br><br>
+<button onclick="acessar()">Acessar</button>
+<p id="erro" style="color:red;"></p>
 </div>
 
-<!-- SLIDE 1 -->
-<section class="slide active">
-<h1>Endomarketing não é ação. É sistema.</h1>
-<p>
-A Crescenza nasce da convicção de que <strong>empresas não adoecem sozinhas</strong>.
-Elas adoecem quando pessoas deixam de pertencer.
-</p>
-<p>
-Endomarketing, para nós, não é mural bonito, café temático ou evento isolado.
-É uma <strong>arquitetura invisível</strong> que sustenta cultura, comportamento,
-engajamento e permanência.
-</p>
-<button class="btn" onclick="next()">Continuar</button>
-</section>
+<!-- CONTEÚDO -->
+<div id="conteudo" class="hidden">
+<div class="container">
 
-<!-- SLIDE 2 -->
-<section class="slide">
-<h2>Comunicação Interna x Endomarketing</h2>
-<p>
-<strong>Comunicação Interna</strong> responde ao “o quê”.
-<strong>Endomarketing</strong> responde ao “por quê”.
-</p>
-<p>
-Quando a empresa apenas informa, ela organiza.
-Quando ela comunica com propósito, ela mobiliza.
-</p>
-<ul>
-<li>Comunicação interna sem endomarketing gera ruído</li>
-<li>Endomarketing sem método vira evento vazio</li>
-</ul>
-<button class="btn" onclick="next()">Avançar</button>
-</section>
+<!-- MANIFESTO -->
+<div class="section">
+<h1>Crescenza</h1>
+<p><strong>Crescenza</strong> nasce da compreensão de que empresas crescem quando pessoas crescem.</p>
+<p>Não falamos de ações isoladas, campanhas pontuais ou datas comemorativas. Falamos de <strong>cultura viva</strong>, construída no cotidiano, nas decisões, na comunicação e na forma como cada colaborador se sente pertencente.</p>
+<p>Este material não é um teste. É uma <strong>experiência de consciência organizacional</strong>.</p>
+</div>
 
-<!-- SLIDE 3 -->
-<section class="slide">
-<h2>Os 6 Pilares da Maturidade Crescenza</h2>
-<p>Cada pilar representa um ponto crítico da experiência do colaborador.</p>
+<!-- SOBRE O TRABALHO -->
+<div class="section">
+<h2>Sobre a Metodologia</h2>
+<p>Meu trabalho une estratégia, gestão de pessoas e leitura profunda de cultura organizacional.</p>
+<p>Antes de medir, eu ensino. Antes de recomendar, eu contextualizo. Porque diagnóstico sem compreensão gera resistência — não mudança.</p>
+</div>
+
+<!-- DIAGNÓSTICO -->
+<div class="section">
+<h2>Diagnóstico de Maturidade em Endomarketing</h2>
+<p>A seguir, você avaliará seis pilares essenciais. Leia com atenção cada explicação antes de responder.</p>
 
 <div class="pillar">
 <h3>1. Comunicação com Propósito</h3>
-<p>Clareza, coerência, narrativa e alinhamento entre discurso e prática.</p>
-<input type="range" min="0" max="10" value="0" class="range">
-<span class="score">0</span>
+<p>Não é sobre informar. É sobre gerar sentido. Comunicação com propósito conecta estratégia, cultura e pessoas.</p>
+<input type="range" min="0" max="10" value="0">
 </div>
 
 <div class="pillar">
 <h3>2. Clima & Engajamento</h3>
-<p>Medição contínua, escuta ativa e ação sobre dados humanos.</p>
-<input type="range" min="0" max="10" value="0" class="range">
-<span class="score">0</span>
+<p>Engajamento não se exige, se constrói. Ele nasce da coerência entre discurso e prática.</p>
+<input type="range" min="0" max="10" value="0">
 </div>
 
 <div class="pillar">
 <h3>3. Onboarding Humanizado</h3>
-<p>Experiência estruturada de pertencimento nos primeiros 90 dias.</p>
-<input type="range" min="0" max="10" value="0" class="range">
-<span class="score">0</span>
+<p>A forma como alguém entra define o quanto ele ficará. Onboarding é vínculo, não checklist.</p>
+<input type="range" min="0" max="10" value="0">
 </div>
 
 <div class="pillar">
-<h3>4. Reconhecimento</h3>
-<p>Rituais, feedbacks, visibilidade e salário emocional.</p>
-<input type="range" min="0" max="10" value="0" class="range">
-<span class="score">0</span>
+<h3>4. Reconhecimento & Valorização</h3>
+<p>Pessoas que não se sentem vistas, silenciosamente se desligam — mesmo permanecendo.</p>
+<input type="range" min="0" max="10" value="0">
 </div>
 
 <div class="pillar">
 <h3>5. Treinamento & Desenvolvimento</h3>
-<p>Trilhas, evolução percebida e futuro claro.</p>
-<input type="range" min="0" max="10" value="0" class="range">
-<span class="score">0</span>
+<p>Desenvolver não é treinar para a função apenas, é preparar para o futuro.</p>
+<input type="range" min="0" max="10" value="0">
 </div>
 
 <div class="pillar">
-<h3>6. Saúde & Bem-estar</h3>
-<p>Segurança psicológica, prevenção e cuidado genuíno.</p>
-<input type="range" min="0" max="10" value="0" class="range">
-<span class="score">0</span>
+<h3>6. Saúde & Bem-Estar</h3>
+<p>Produtividade sustentável exige saúde emocional, mental e relacional.</p>
+<input type="range" min="0" max="10" value="0">
 </div>
 
-<button class="btn" onclick="calc()">Gerar Diagnóstico</button>
-</section>
+<button onclick="gerarResultado()">Gerar Diagnóstico</button>
+</div>
 
-<!-- RESULT -->
-<section id="result">
+<!-- RESULTADO -->
+<div class="section hidden" id="resultado">
 <h2>Resultado Executivo</h2>
-<h1 id="percent"></h1>
-<h3 id="level"></h3>
-
-<canvas id="radar" width="400" height="400"></canvas>
-
-<div class="cta">
-<h3>Próximo passo</h3>
-<p>
-O diagnóstico revela o estágio.
-A transformação exige método.
-</p>
-<a class="btn" href="https://wa.me/55996842002" target="_blank">
-Falar com a Crescenza
-</a>
-<p style="margin-top:15px">
-<a href="https://www.crescenzaonline.com/" target="_blank">www.crescenzaonline.com</a>
-</p>
+<h1 id="percentual"></h1>
+<div id="leitura"></div>
+<canvas id="radar"></canvas>
+<button onclick="gerarPDF()">Gerar PDF Executivo</button>
 </div>
 
-<button class="btn" onclick="window.print()">Salvar PDF</button>
-</section>
-
+</div>
 </div>
 
 <script>
-const PASSWORD="ENDOMARKETINGPREMIUMCRESCENZA";
-function unlock(){
-if(document.getElementById("pass").value===PASSWORD){
-document.getElementById("lock").style.display="none";
-document.getElementById("app").style.display="block";
-}else document.getElementById("error").style.display="block";
+function acessar(){
+const senha="crescenza360";
+if(document.getElementById("senha").value===senha){
+document.getElementById("login").style.display="none";
+document.getElementById("conteudo").classList.remove("hidden");
+}else{
+document.getElementById("erro").innerText="Senha incorreta.";
+}
 }
 
-let slides=document.querySelectorAll(".slide");
-let index=0;
-function next(){
-slides[index].classList.remove("active");
-index++;
-slides[index].classList.add("active");
-}
-
-document.querySelectorAll(".range").forEach((r,i)=>{
-r.oninput=()=>document.querySelectorAll(".score")[i].innerText=r.value;
+function gerarResultado(){
+const sliders=document.querySelectorAll("input[type=range]");
+const pesos=[0.2,0.2,0.15,0.15,0.15,0.15];
+let total=0;
+let dados=[];
+sliders.forEach((s,i)=>{
+dados.push(Number(s.value));
+total+=(s.value/10)*pesos[i]*100;
 });
+document.getElementById("percentual").innerText=Math.round(total)+"%";
+document.getElementById("resultado").classList.remove("hidden");
 
-function calc(){
-let vals=[...document.querySelectorAll(".range")].map(r=>+r.value);
-let weights=[0.2,0.2,0.15,0.15,0.15,0.15];
-let score=vals.reduce((a,v,i)=>a+v*10*weights[i],0);
-document.getElementById("percent").innerText=Math.round(score)+"%";
-
-let level="Risco Cultural";
-if(score>=45)level="Estrutura em Construção";
-if(score>=70)level="Cultura Consolidada";
-if(score>=85)level="Excelência em Endomarketing";
-document.getElementById("level").innerText=level;
-
-drawRadar(vals);
-slides[index].classList.remove("active");
-document.getElementById("result").style.display="block";
-}
-
-function drawRadar(data){
-let c=document.getElementById("radar");
-let ctx=c.getContext("2d");
-let cx=200,cy=200,r=140;
-ctx.clearRect(0,0,400,400);
-ctx.strokeStyle="#ccc";
-for(let i=0;i<6;i++){
-let a=i*2*Math.PI/6;
-ctx.beginPath();
-ctx.moveTo(cx,cy);
-ctx.lineTo(cx+r*Math.cos(a),cy+r*Math.sin(a));
-ctx.stroke();
-}
-ctx.beginPath();
-data.forEach((v,i)=>{
-let a=i*2*Math.PI/6;
-let rr=r*(v/10);
-let x=cx+rr*Math.cos(a);
-let y=cy+rr*Math.sin(a);
-if(i==0)ctx.moveTo(x,y);else ctx.lineTo(x,y);
+new Chart(document.getElementById("radar"),{
+type:"radar",
+data:{
+labels:["Comunicação","Clima","Onboarding","Reconhecimento","T&D","Bem-estar"],
+datasets:[{data:dados,backgroundColor:"rgba(230,81,0,.3)",borderColor:"#e65100"}]
+},
+options:{scales:{r:{min:0,max:10}}}
 });
-ctx.closePath();
-ctx.fillStyle="rgba(230,81,0,0.4)";
-ctx.fill();
-ctx.strokeStyle="#e65100";
-ctx.stroke();
+}
+
+function gerarPDF(){
+const {jsPDF}=window.jspdf;
+const doc=new jsPDF();
+doc.text("Diagnóstico Crescenza",10,20);
+doc.text("Resultado: "+document.getElementById("percentual").innerText,10,40);
+doc.save("Diagnostico_Crescenza.pdf");
 }
 </script>
+
 </body>
 </html>
