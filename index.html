@@ -3,445 +3,398 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diagnóstico Estratégico | Crescenza Consultoria</title>
+    <title>Diagnóstico Endomarketing Premium | Crescenza</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,600;0,800;1,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Manrope:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* --- DESIGN SYSTEM CRESCENZA --- */
+        /* --- DESIGN SYSTEM CRESCENZA HIGH-END --- */
         :root {
-            --brand: #e65100;       /* Laranja Identidade */
-            --brand-light: #fff7ed;
-            --navy: #0f172a;        /* Azul Corporativo */
-            --text: #334155;        /* Cinza Leitura */
-            --bg: #f8fafc;          /* Fundo Suave */
-            --white: #ffffff;
+            --brand: #e65100;       /* Laranja Marca */
+            --brand-dark: #c2410c;
+            --navy: #0f172a;        /* Azul Profundo */
+            --slate: #334155;       /* Cinza Texto */
+            --paper: #ffffff;
+            --bg-soft: #f8fafc;
             --gold: #d4af37;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; outline: none; }
+        * { box-sizing: border-box; outline: none; margin: 0; padding: 0; }
 
         body {
             font-family: 'Manrope', sans-serif;
-            background-color: var(--bg);
-            color: var(--text);
+            background-color: var(--bg-soft);
+            color: var(--slate);
             line-height: 1.6;
+            min-height: 100vh;
         }
 
-        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; color: var(--navy); }
-        strong { color: var(--brand); font-weight: 700; }
-        a { text-decoration: none; transition: 0.3s; }
+        h1, h2, h3 { font-family: 'Playfair Display', serif; color: var(--navy); }
+        strong { color: var(--brand); }
 
-        /* --- TELA DE BLOQUEIO (MODAL) --- */
-        #lock-screen {
+        /* --- TELA DE BLOQUEIO (MODAL DE SEGURANÇA) --- */
+        #security-modal {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--navy);
-            z-index: 10000;
-            display: flex; align-items: center; justify-content: center;
-            flex-direction: column;
-        }
-        
-        .lock-card {
-            background: rgba(255,255,255,0.05); padding: 40px; border-radius: 12px;
-            text-align: center; border: 1px solid rgba(255,255,255,0.1);
-            width: 90%; max-width: 400px; backdrop-filter: blur(10px);
-        }
-        
-        .lock-logo { 
-            font-size: 2rem; color: var(--brand); font-weight: 800; letter-spacing: 2px; 
-            margin-bottom: 5px; font-family: 'Playfair Display', serif; display: block;
-        }
-        .lock-text { color: #94a3b8; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
-        .insta-ref { color: white; font-size: 0.9rem; margin-bottom: 30px; display: block; opacity: 0.8; }
-        .insta-ref:hover { color: var(--brand); opacity: 1; }
-        
-        .input-pass {
-            width: 100%; padding: 15px; background: rgba(0,0,0,0.3); border: 1px solid #475569;
-            color: white; text-align: center; font-size: 1rem; letter-spacing: 2px;
-            text-transform: uppercase; border-radius: 6px; margin-bottom: 20px; transition: 0.3s;
-        }
-        .input-pass:focus { border-color: var(--brand); background: rgba(0,0,0,0.5); }
-        
-        .btn-unlock {
-            width: 100%; padding: 15px; background: var(--brand); color: white; border: none;
-            font-weight: 700; text-transform: uppercase; letter-spacing: 1px; border-radius: 6px;
-            cursor: pointer; transition: 0.3s;
-        }
-        .btn-unlock:hover { background: white; color: var(--brand); }
-
-        /* --- CONTAINER PRINCIPAL --- */
-        .container { max-width: 900px; margin: 0 auto; background: var(--white); box-shadow: 0 0 40px rgba(0,0,0,0.05); }
-
-        /* HERO HEADER */
-        header {
             background: linear-gradient(135deg, var(--navy) 0%, #1e293b 100%);
-            color: white; padding: 80px 40px; text-align: center;
+            z-index: 9999;
+            display: flex; align-items: center; justify-content: center;
+            backdrop-filter: blur(8px);
         }
-        .tagline { color: var(--brand); font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; display: block; margin-bottom: 15px; }
-        header h1 { color: white; font-size: 3rem; line-height: 1.2; margin-bottom: 20px; }
-        header p { color: #cbd5e1; font-size: 1.1rem; max-width: 600px; margin: 0 auto; font-weight: 300; }
-        .header-insta { display: inline-block; margin-top: 20px; color: rgba(255,255,255,0.6); font-size: 0.9rem; border: 1px solid rgba(255,255,255,0.2); padding: 5px 15px; border-radius: 20px; }
-        .header-insta:hover { background: white; color: var(--navy); }
 
-        /* SEÇÃO EDUCACIONAL (ORIENTATIVO) */
-        .edu-section { padding: 60px 40px; }
-        
-        .concept-box {
-            background: var(--brand-light); border-left: 5px solid var(--brand);
-            padding: 30px; margin: 40px 0; border-radius: 0 10px 10px 0;
+        .login-box {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 50px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            width: 90%; max-width: 420px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
-        .concept-quote { font-size: 1.4rem; font-family: 'Playfair Display', serif; font-style: italic; color: #431407; margin-bottom: 10px; }
-        .concept-source { font-size: 0.8rem; text-transform: uppercase; color: var(--brand); font-weight: 700; }
 
-        .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 40px; }
-        @media(max-width: 768px) { .edu-grid { grid-template-columns: 1fr; } }
+        .login-brand { font-size: 1.8rem; color: var(--brand); letter-spacing: 3px; font-weight: 800; text-transform: uppercase; margin-bottom: 5px; }
+        .login-text { color: #94a3b8; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 30px; }
 
-        .edu-card h3 { font-size: 1.3rem; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
-        .edu-card p { font-size: 0.95rem; color: #475569; text-align: justify; }
+        .pass-input {
+            width: 100%; padding: 16px; border-radius: 8px; border: 1px solid #475569;
+            background: rgba(15, 23, 42, 0.6); color: white; text-align: center;
+            font-size: 1.1rem; letter-spacing: 1px; margin-bottom: 20px;
+            text-transform: uppercase; transition: 0.3s;
+        }
+        .pass-input:focus { border-color: var(--brand); box-shadow: 0 0 0 4px rgba(230, 81, 0, 0.1); }
+
+        .btn-access {
+            width: 100%; padding: 16px; background: var(--brand); color: white;
+            border: none; border-radius: 8px; font-weight: 800; cursor: pointer;
+            text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; font-size: 0.9rem;
+        }
+        .btn-access:hover { background: var(--brand-dark); transform: translateY(-2px); }
+
+        .error-toast { 
+            color: #ef4444; margin-top: 15px; font-size: 0.8rem; font-weight: 700; 
+            display: none; animation: shake 0.5s; 
+        }
+        @keyframes shake { 0% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } 100% { transform: translateX(0); } }
+
+        /* --- CONTEÚDO PRINCIPAL --- */
+        #main-content { display: none; max-width: 900px; margin: 40px auto; padding-bottom: 60px; }
+
+        .paper-card {
+            background: var(--paper);
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+            overflow: hidden;
+            margin-bottom: 30px;
+            border-top: 5px solid var(--brand);
+        }
+
+        header { padding: 50px 40px; text-align: center; border-bottom: 1px solid #f1f5f9; }
+        header h1 { font-size: 2.5rem; margin: 10px 0; line-height: 1.2; }
+        .subtitle { font-family: 'Manrope', sans-serif; color: #64748b; font-size: 1rem; max-width: 600px; margin: 0 auto; }
+
+        /* INTRODUÇÃO E CITAÇÕES */
+        .intro-section { padding: 40px; }
+        .quote-block {
+            background: #fff7ed; border-left: 4px solid var(--brand); padding: 25px; margin: 20px 0;
+            font-family: 'Playfair Display', serif; font-size: 1.2rem; font-style: italic; color: #431407;
+        }
+        .quote-source { font-family: 'Manrope', sans-serif; font-size: 0.75rem; font-weight: 700; color: var(--brand); text-transform: uppercase; display: block; margin-top: 10px; font-style: normal; }
 
         /* DIAGNÓSTICO */
-        .diag-section { background: #fafafa; padding: 60px 40px; border-top: 1px solid #f1f5f9; }
-        .section-title { text-align: center; margin-bottom: 50px; }
-        .section-title h2 { font-size: 2.2rem; margin-bottom: 10px; }
+        .pillar { padding: 30px 40px; border-bottom: 1px solid #f1f5f9; transition: 0.3s; }
+        .pillar:hover { background: #fafafa; }
         
-        .pillar-card {
-            background: var(--white); padding: 30px; border-radius: 12px; margin-bottom: 30px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.02); border: 1px solid #f1f5f9;
-            transition: transform 0.3s;
-        }
-        .pillar-card:hover { transform: translateY(-5px); border-color: var(--brand); }
-
-        .pillar-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
-        .pillar-name { font-size: 1.2rem; font-weight: 700; color: var(--navy); display: flex; align-items: center; gap: 10px; }
-        .pillar-ref { background: #e2e8f0; font-size: 0.7rem; padding: 4px 8px; border-radius: 4px; font-weight: 700; color: #475569; }
-
-        .pillar-desc { font-size: 0.95rem; margin-bottom: 20px; color: #64748b; }
+        .pillar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        .pillar-title { font-size: 1.2rem; font-weight: 800; color: var(--navy); display: flex; align-items: center; gap: 10px; }
+        .pillar-title i { color: var(--brand); font-size: 1rem; }
         
-        .range-wrap { margin-top: 20px; }
-        .range-labels { display: flex; justify-content: space-between; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: #94a3b8; margin-bottom: 8px; }
+        .ref-tag { background: #e2e8f0; color: #475569; font-size: 0.7rem; font-weight: 700; padding: 4px 8px; border-radius: 4px; text-transform: uppercase; }
+
+        .range-wrap { margin-top: 25px; position: relative; }
+        .range-labels { display: flex; justify-content: space-between; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: #94a3b8; margin-bottom: 10px; }
         
         input[type=range] {
-            width: 100%; height: 6px; background: #cbd5e1; border-radius: 5px; -webkit-appearance: none; cursor: pointer;
+            width: 100%; height: 6px; background: #cbd5e1; border-radius: 10px; -webkit-appearance: none; cursor: pointer;
         }
         input[type=range]::-webkit-slider-thumb {
-            -webkit-appearance: none; width: 24px; height: 24px; background: var(--brand);
-            border-radius: 50%; border: 3px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-            transition: transform 0.1s;
+            -webkit-appearance: none; width: 24px; height: 24px; background: var(--brand); border-radius: 50%;
+            border: 4px solid white; box-shadow: 0 2px 6px rgba(0,0,0,0.2); transition: transform 0.1s;
         }
         input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.2); }
-        
-        .score-display { text-align: right; font-weight: 700; color: var(--brand); font-size: 1.1rem; margin-top: 5px; }
+
+        .score-val { position: absolute; right: 0; top: -30px; font-weight: 800; color: var(--brand); font-size: 1.1rem; }
 
         /* RESULTADO */
-        #result-area { display: none; background: var(--navy); color: white; padding: 60px 40px; text-align: center; }
-        
-        .result-circle {
-            width: 140px; height: 140px; border-radius: 50%; border: 8px solid var(--brand);
-            display: flex; align-items: center; justify-content: center; margin: 0 auto 30px;
-            font-size: 2.5rem; font-family: 'Playfair Display', serif; font-weight: 700;
-        }
-        
-        .diagnosis-box {
-            background: rgba(255,255,255,0.05); text-align: left; padding: 30px; border-radius: 8px;
-            margin: 40px 0; border-left: 4px solid var(--brand);
-        }
-        .diagnosis-box h3 { color: var(--white); font-size: 1.5rem; margin-bottom: 15px; }
-        .diagnosis-box p { color: #cbd5e1; margin-bottom: 20px; }
-        
-        .cta-box {
-            background: var(--white); color: var(--navy); padding: 40px; border-radius: 12px; margin-top: 40px;
-        }
-        .btn-whatsapp {
-            display: inline-flex; align-items: center; gap: 10px; background: #25D366; color: white;
-            padding: 18px 35px; border-radius: 50px; text-decoration: none; font-weight: 700;
-            font-size: 1rem; transition: 0.3s; margin-top: 20px;
-        }
-        .btn-whatsapp:hover { transform: scale(1.05); box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3); }
+        #result-section { display: none; background: var(--navy); color: white; padding: 50px; text-align: center; border-radius: 12px; margin-top: 40px; position: relative; overflow: hidden; }
+        .score-big { font-size: 4rem; font-weight: 800; color: var(--brand); line-height: 1; margin-bottom: 10px; font-family: 'Playfair Display', serif; }
+        .result-plan { background: rgba(255,255,255,0.1); padding: 25px; border-radius: 8px; text-align: left; margin-top: 30px; border: 1px solid rgba(255,255,255,0.1); }
 
         /* IMPRESSÃO */
         @media print {
-            #lock-screen, .btn-action, .btn-whatsapp, .header-insta { display: none !important; }
-            body { background: white; color: black; }
-            .container { box-shadow: none; max-width: 100%; }
-            header { background: white !important; color: black !important; border-bottom: 2px solid black; }
-            header h1, header p { color: black !important; }
-            #result-area { display: block !important; background: white !important; color: black !important; border-top: 2px solid black; }
-            .result-circle { border-color: black; color: black; }
-            .diagnosis-box { background: #eee; color: black; border-color: black; }
-            .diagnosis-box h3, .diagnosis-box p, .diagnosis-box li { color: black !important; }
+            body { background: white; }
+            #security-modal, .btn-calc, .btn-print, .range-wrap input { display: none; }
+            #main-content { display: block !important; box-shadow: none; margin: 0; }
+            #result-section { display: block !important; background: #fff !important; color: #000 !important; border: 2px solid #000; }
+            .pillar { page-break-inside: avoid; border-bottom: 1px solid #ccc; }
+            .score-val { position: relative; top: 0; display: block; text-align: right; }
+            .score-val::before { content: "Nota: "; color: black; font-size: 0.8rem; }
         }
     </style>
 </head>
 <body>
 
-    <div id="lock-screen">
-        <div class="lock-card">
-            <a href="https://www.crescenzaonline.com/" target="_blank" class="lock-logo">CRESCENZA</a>
-            <div class="lock-text">Ferramenta Exclusiva de Diagnóstico</div>
+    <div id="security-modal">
+        <div class="login-box">
+            <div class="login-brand">CRESCENZA</div>
+            <div class="login-text">Ferramenta Exclusiva de Diagnóstico</div>
             
-            <a href="https://www.instagram.com/idionaraprass" target="_blank" class="insta-ref">
-                <i class="fab fa-instagram"></i> @IDIONARAPRASS
-            </a>
-
-            <input type="password" id="password" class="input-pass" placeholder="DIGITE A SENHA" onkeypress="checkEnter(event)">
-            <button class="btn-unlock" onclick="unlock()">Desbloquear Acesso</button>
-            <div id="error-msg" style="color:#ef4444; margin-top:15px; display:none; font-weight:bold; font-size:0.9rem;">Senha Incorreta</div>
+            <input type="password" id="password" class="pass-input" placeholder="DIGITE A SENHA">
+            <button id="btn-login" class="btn-access">DESBLOQUEAR ACESSO</button>
+            
+            <div id="error-msg" class="error-toast">SENHA INCORRETA. TENTE NOVAMENTE.</div>
         </div>
     </div>
 
-    <div class="container" id="main-app" style="display:none;">
-        
-        <header>
-            <span class="tagline">Consultoria & Gestão Estratégica</span>
-            <h1>Endomarketing Premium</h1>
-            <p>Diagnóstico de maturidade cultural, engajamento e retenção de talentos baseado em dados.</p>
-            
-            <a href="https://www.instagram.com/idionaraprass" target="_blank" class="header-insta">
-                <i class="fab fa-instagram"></i> Siga @IDIONARAPRASS
-            </a>
-        </header>
+    <div id="main-content">
+        <div class="paper-card">
+            <header>
+                <div style="color:var(--brand); font-weight:800; letter-spacing:2px; font-size:0.8rem; margin-bottom:10px;">ENDOMARKETING PREMIUM</div>
+                <h1>Diagnóstico de Maturidade<br>Gente & Gestão</h1>
+                <p class="subtitle">Avalie seus pilares de retenção e engajamento baseado em dados e receba um plano de ação personalizado.</p>
+            </header>
 
-        <div class="edu-section">
-            <div class="concept-box">
-                <p class="concept-quote">"Empresas são feitas de processos, mas movidas por pessoas. O crachá organiza, o propósito mobiliza."</p>
-                <span class="concept-source">DNA Crescenza</span>
+            <div class="intro-section">
+                <div class="quote-block">
+                    "Empresas são feitas de processos, mas movidas por pessoas. O crachá organiza, o propósito mobiliza."
+                    [cite_start]<span class="quote-source">Crescenza Consultoria [cite: 16]</span>
+                </div>
+                <p>Este diagnóstico é fundamentado nos conceitos de <strong>Saul Bekin</strong> (cliente interno) e nas práticas modernas de retenção de talentos. Avalie honestamente os 6 pilares abaixo.</p>
             </div>
 
-            <p style="text-align:center; max-width:800px; margin:0 auto; color:#475569;">
-                Muitas empresas falham ao confundir <strong>Comunicação Interna</strong> com <strong>Endomarketing</strong>. Antes de iniciarmos seu diagnóstico, entenda a diferença fundamental que orienta nossa metodologia:
-            </p>
+            <div class="pillar">
+                <div class="pillar-header">
+                    <div class="pillar-title"><i class="fas fa-bullhorn"></i> 1. Comunicação com Propósito</div>
+                    <span class="ref-tag">Ref: Saul Bekin</span>
+                </div>
+                <p style="font-size:0.9rem; color:#64748b;">
+                    Sua comunicação apenas "informa" (avisos) ou "engaja" (pertencimento)? [cite_start]Segundo Bekin, o endomarketing deve vender a empresa para o funcionário[cite: 50].
+                </p>
+                <div class="range-wrap">
+                    <div class="range-labels"><span>Inexistente</span> <span>Estratégica</span></div>
+                    <input type="range" min="0" max="10" value="0" class="score-input">
+                    <div class="score-val">0</div>
+                </div>
+            </div>
 
-            <div class="edu-grid">
-                <div class="edu-card">
-                    <h3><i class="fas fa-bullhorn" style="color:var(--brand);"></i> Comunicação Interna</h3>
-                    <p>Foca no "O QUE". Transmite informações, avisos e regras. É operacional e necessária, mas sozinha não gera vínculo emocional.</p>
+            <div class="pillar">
+                <div class="pillar-header">
+                    <div class="pillar-title"><i class="fas fa-thermometer-half"></i> 2. Clima e Escuta Ativa</div>
+                    <span class="ref-tag">Ref: Locke (1976)</span>
                 </div>
-                <div class="edu-card">
-                    <h3><i class="fas fa-heart" style="color:var(--brand);"></i> Endomarketing</h3>
-                    <p>Foca no "PORQUÊ". Segundo Saul Bekin, é tratar o colaborador como cliente. Transforma informação em pertencimento, engajamento e cultura.</p>
+                <p style="font-size:0.9rem; color:#64748b;">
+                    [cite_start]A satisfação é variável crítica de desempenho[cite: 243]. Você realiza pesquisas de clima (Pulse) e cria planos de ação visíveis a partir delas?
+                </p>
+                <div class="range-wrap">
+                    <div class="range-labels"><span>Reativo</span> <span>Preventivo</span></div>
+                    <input type="range" min="0" max="10" value="0" class="score-input">
+                    <div class="score-val">0</div>
                 </div>
+            </div>
+
+            <div class="pillar">
+                <div class="pillar-header">
+                    <div class="pillar-title"><i class="fas fa-door-open"></i> 3. Onboarding Humanizado</div>
+                    <span class="ref-tag">Ref: Bauer (2010)</span>
+                </div>
+                <p style="font-size:0.9rem; color:#64748b;">
+                    [cite_start]Programas de integração aumentam a retenção e aceleram o desempenho[cite: 120]. Seu onboarding dura apenas 1 dia (papelada) ou é uma jornada de 90 dias?
+                </p>
+                <div class="range-wrap">
+                    <div class="range-labels"><span>Burocrático</span> <span>Imersivo</span></div>
+                    <input type="range" min="0" max="10" value="0" class="score-input">
+                    <div class="score-val">0</div>
+                </div>
+            </div>
+
+            <div class="pillar">
+                <div class="pillar-header">
+                    <div class="pillar-title"><i class="fas fa-medal"></i> 4. Reconhecimento</div>
+                    <span class="ref-tag">Ref: Gallup (2017)</span>
+                </div>
+                <p style="font-size:0.9rem; color:#64748b;">
+                    [cite_start]Equipes reconhecidas têm mais engajamento e menos absenteísmo[cite: 177]. Existem rituais formais de elogio e celebração de pequenas vitórias?
+                </p>
+                <div class="range-wrap">
+                    <div class="range-labels"><span>Raro</span> <span>Constante</span></div>
+                    <input type="range" min="0" max="10" value="0" class="score-input">
+                    <div class="score-val">0</div>
+                </div>
+            </div>
+
+            <div class="pillar">
+                <div class="pillar-header">
+                    <div class="pillar-title"><i class="fas fa-graduation-cap"></i> 5. Treinamento (T&D)</div>
+                    <span class="ref-tag">Ref: Chiavenato</span>
+                </div>
+                <p style="font-size:0.9rem; color:#64748b;">
+                    [cite_start]O desenvolvimento humano é base da vantagem competitiva[cite: 221]. Sua empresa oferece trilhas de aprendizado contínuo além do operacional básico?
+                </p>
+                <div class="range-wrap">
+                    <div class="range-labels"><span>Estagnado</span> <span>Inovador</span></div>
+                    <input type="range" min="0" max="10" value="0" class="score-input">
+                    <div class="score-val">0</div>
+                </div>
+            </div>
+
+            <div class="pillar">
+                <div class="pillar-header">
+                    <div class="pillar-title"><i class="fas fa-heartbeat"></i> 6. Saúde e Bem-Estar</div>
+                    <span class="ref-tag">Ref: OIT (2022)</span>
+                </div>
+                <p style="font-size:0.9rem; color:#64748b;">
+                    [cite_start]Empresas saudáveis aumentam até 20% a produtividade[cite: 199]. Há ações de saúde mental (Janeiro Branco) e segurança psicológica integradas à cultura?
+                </p>
+                <div class="range-wrap">
+                    <div class="range-labels"><span>Legalista</span> <span>Genuíno</span></div>
+                    <input type="range" min="0" max="10" value="0" class="score-input">
+                    <div class="score-val">0</div>
+                </div>
+            </div>
+
+            <div style="padding:40px;">
+                <button id="btn-calc" class="btn-access btn-calc" style="font-size:1.1rem; padding:20px;">GERAR DIAGNÓSTICO E PLANO</button>
             </div>
         </div>
 
-        <div class="diag-section">
-            <div class="section-title">
-                <h2>Diagnóstico de Maturidade 360°</h2>
-                <p>Avalie sua empresa nos 6 pilares estratégicos da Crescenza.</p>
-            </div>
-
-            <div class="pillar-card">
-                <div class="pillar-head">
-                    <div class="pillar-name"><i class="fas fa-comments"></i> 1. Comunicação com Propósito</div>
-                    <span class="pillar-ref">Ref: Saul Bekin</span>
-                </div>
-                <p class="pillar-desc">
-                    Sua comunicação apenas "avisa" (mural frio) ou "vende" a empresa para o funcionário? O objetivo é reduzir a "rádio peão" e alinhar discurso e prática.
-                </p>
-                <div class="range-wrap">
-                    <div class="range-labels"><span>Inexistente (0)</span> <span>Estratégica (10)</span></div>
-                    <input type="range" min="0" max="10" value="0" class="score-input" oninput="updateVal(this)">
-                    <div class="score-display">0</div>
-                </div>
-            </div>
-
-            <div class="pillar-card">
-                <div class="pillar-head">
-                    <div class="pillar-name"><i class="fas fa-users"></i> 2. Clima & Engajamento</div>
-                    <span class="pillar-ref">Ref: Locke (1976)</span>
-                </div>
-                <p class="pillar-desc">
-                    A satisfação é crítica para o desempenho. Você roda pesquisas de clima periódicas (Pulse) e, mais importante, <strong>age</strong> sobre os resultados?
-                </p>
-                <div class="range-wrap">
-                    <div class="range-labels"><span>Reativo (0)</span> <span>Preventivo (10)</span></div>
-                    <input type="range" min="0" max="10" value="0" class="score-input" oninput="updateVal(this)">
-                    <div class="score-display">0</div>
-                </div>
-            </div>
-
-            <div class="pillar-card">
-                <div class="pillar-head">
-                    <div class="pillar-name"><i class="fas fa-door-open"></i> 3. Onboarding Humanizado</div>
-                    <span class="pillar-ref">Ref: Bauer (2010)</span>
-                </div>
-                <p class="pillar-desc">
-                    A primeira impressão define a retenção. Seu onboarding é apenas assinatura de papéis ou existe uma jornada de acolhimento e cultura de 90 dias?
-                </p>
-                <div class="range-wrap">
-                    <div class="range-labels"><span>Burocrático (0)</span> <span>Imersivo (10)</span></div>
-                    <input type="range" min="0" max="10" value="0" class="score-input" oninput="updateVal(this)">
-                    <div class="score-display">0</div>
-                </div>
-            </div>
-
-            <div class="pillar-card">
-                <div class="pillar-head">
-                    <div class="pillar-name"><i class="fas fa-medal"></i> 4. Reconhecimento</div>
-                    <span class="pillar-ref">Ref: Gallup (2017)</span>
-                </div>
-                <p class="pillar-desc">
-                    Não é apenas salário. Equipes reconhecidas têm menos absenteísmo. Sua empresa tem rituais de celebração de vitórias e feedback positivo?
-                </p>
-                <div class="range-wrap">
-                    <div class="range-labels"><span>Raro (0)</span> <span>Cultura Diária (10)</span></div>
-                    <input type="range" min="0" max="10" value="0" class="score-input" oninput="updateVal(this)">
-                    <div class="score-display">0</div>
-                </div>
-            </div>
-
-            <div class="pillar-card">
-                <div class="pillar-head">
-                    <div class="pillar-name"><i class="fas fa-graduation-cap"></i> 5. Treinamento (T&D)</div>
-                    <span class="pillar-ref">Ref: Chiavenato</span>
-                </div>
-                <p class="pillar-desc">
-                    Desenvolvimento humano é vantagem competitiva. O colaborador sente que está evoluindo ou estagnado? Existem trilhas de aprendizado?
-                </p>
-                <div class="range-wrap">
-                    <div class="range-labels"><span>Estagnado (0)</span> <span>Inovador (10)</span></div>
-                    <input type="range" min="0" max="10" value="0" class="score-input" oninput="updateVal(this)">
-                    <div class="score-display">0</div>
-                </div>
-            </div>
-
-            <div class="pillar-card">
-                <div class="pillar-head">
-                    <div class="pillar-name"><i class="fas fa-heartbeat"></i> 6. Saúde e Bem-Estar</div>
-                    <span class="pillar-ref">Ref: OIT (2022)</span>
-                </div>
-                <p class="pillar-desc">
-                    Empresas saudáveis produzem 20% mais. Ações como Janeiro Branco e segurança psicológica são genuínas ou apenas cumprimento de tabela?
-                </p>
-                <div class="range-wrap">
-                    <div class="range-labels"><span>Legalista (0)</span> <span>Genuíno (10)</span></div>
-                    <input type="range" min="0" max="10" value="0" class="score-input" oninput="updateVal(this)">
-                    <div class="score-display">0</div>
-                </div>
-            </div>
-
-            <div style="text-align:center; margin-top:40px;">
-                <button class="btn-unlock btn-action" onclick="calcResult()" style="width:100%; max-width:400px; font-size:1.1rem; padding:20px;">
-                    GERAR DIAGNÓSTICO COMPLETO
-                </button>
-            </div>
-        </div>
-
-        <div id="result-area">
-            <h3 style="color:#94a3b8; text-transform:uppercase; letter-spacing:2px; margin-bottom:20px;">Índice de Maturidade Endomarketing</h3>
-            <div class="result-circle" id="final-score">0%</div>
-            <h2 id="result-title" style="color:white; margin-bottom:10px;">Calculando...</h2>
+        <div id="result-section">
+            <h3 style="color:#94a3b8; font-size:0.9rem; letter-spacing:2px; text-transform:uppercase; margin-bottom:20px;">Índice de Maturidade Endomarketing</h3>
+            <div class="score-big" id="final-score">0%</div>
+            <h2 id="result-title" style="color:white; margin-bottom:10px;">Aguardando Dados...</h2>
             
-            <div class="diagnosis-box">
-                <h3 id="plan-name">Recomendação Estratégica</h3>
-                <div id="plan-content">
-                </div>
-            </div>
-
-            <div class="cta-box">
-                <h3 style="color:var(--navy); margin-bottom:10px;">Podemos te ajudar a implementar isso.</h3>
-                <p style="color:#64748b; margin-bottom:20px;">
-                    O diagnóstico aponta o problema, mas a solução exige método. A Crescenza possui planos estruturados (90°, 180° e 360°) para transformar esses números em cultura real.
+            <div class="result-plan">
+                <h4 style="color:var(--brand); margin-bottom:10px; text-transform:uppercase;"><i class="fas fa-clipboard-list"></i> Plano de Ação Recomendado:</h4>
+                <p id="result-desc" style="font-size:0.95rem; color:#cbd5e1; line-height:1.8;">
+                    Preencha os dados acima para receber a recomendação estratégica baseada nos planos Crescenza (90°, 180° e 360°).
                 </p>
-                
-                <a href="https://wa.me/55996842002?text=Olá,%20fiz%20o%20diagnóstico%20de%20endomarketing%20e%20quero%20discutir%20meu%20resultado." class="btn-whatsapp" target="_blank">
-                    <i class="fab fa-whatsapp" style="font-size:1.2rem;"></i> Falar com um Especialista
-                </a>
-                
-                <div style="margin-top: 20px; font-size: 0.9rem;">
-                    <a href="https://www.instagram.com/idionaraprass" target="_blank" style="color: var(--navy); text-decoration: none;">
-                        <i class="fab fa-instagram"></i> Acompanhe <strong>@IDIONARAPRASS</strong>
-                    </a>
-                </div>
             </div>
 
-            <button onclick="window.print()" style="background:transparent; border:1px solid white; color:white; padding:10px 20px; border-radius:50px; margin-top:30px; cursor:pointer;">
-                <i class="fas fa-print"></i> Salvar Relatório PDF
+            <button class="btn-print" onclick="window.print()" style="background:white; color:var(--navy); padding:15px 30px; border:none; border-radius:50px; font-weight:800; margin-top:30px; cursor:pointer;">
+                <i class="fas fa-download"></i> BAIXAR RELATÓRIO PDF
             </button>
         </div>
-
     </div>
 
     <script>
-        // SENHA ATUALIZADA
-        const PASSWORD = "ENDOMARKETINGPREMIUMCRESCENZA";
-
-        function checkEnter(e) {
-            if(e.key === "Enter") unlock();
-        }
-
-        function unlock() {
-            const input = document.getElementById('password').value.trim().toUpperCase();
-            if(input === PASSWORD) {
-                document.getElementById('lock-screen').style.display = 'none';
-                document.getElementById('main-app').style.display = 'block';
-                window.scrollTo(0,0);
-            } else {
-                document.getElementById('error-msg').style.display = 'block';
-            }
-        }
-
-        function updateVal(el) {
-            el.nextElementSibling.innerText = el.value;
-        }
-
-        function calcResult() {
-            const inputs = document.querySelectorAll('.score-input');
-            let total = 0;
-            inputs.forEach(i => total += parseInt(i.value));
+        // SCRIPT ROBUSTO - Executa apenas após carregamento total
+        document.addEventListener("DOMContentLoaded", function() {
             
-            const percent = Math.round((total / 60) * 100);
-            const scoreDisplay = document.getElementById('final-score');
-            const titleDisplay = document.getElementById('result-title');
-            const nameDisplay = document.getElementById('plan-name');
-            const contentDisplay = document.getElementById('plan-content');
+            // --- CONFIGURAÇÃO DE SEGURANÇA ---
+            const CORRECT_PASS = "ENDOMARKETINGCRESCENZA";
+            const modal = document.getElementById('security-modal');
+            const content = document.getElementById('main-content');
+            const inputPass = document.getElementById('password');
+            const btnLogin = document.getElementById('btn-login');
+            const errorMsg = document.getElementById('error-msg');
 
-            scoreDisplay.innerText = percent + "%";
-            document.getElementById('result-area').style.display = 'block';
-
-            // LÓGICA DE DIAGNÓSTICO E PLANOS CRESCENZA
-            if (percent < 45) {
-                // Nível Básico
-                scoreDisplay.style.borderColor = "#ef4444";
-                titleDisplay.innerText = "Alerta: Risco de Turnover";
-                nameDisplay.innerText = "Plano Recomendado: Crescenza 90° (Estruturação)";
-                contentDisplay.innerHTML = `
-                    <p>Sua empresa possui processos, mas falta conexão humana ("Salário Emocional" baixo). O foco imediato deve ser o básico bem feito.</p>
-                    <ul style="color:#cbd5e1; padding-left:20px; line-height:1.8;">
-                        <li><strong>Diagnóstico:</strong> Comunicação ruidosa e onboarding frágil.</li>
-                        <li><strong>O que fazer:</strong> Implementar canais oficiais e um Kit de Boas-Vindas estruturado.</li>
-                        <li><strong>Meta:</strong> Reduzir a "rádio peão" e garantir que o novo colaborador se sinta acolhido nos primeiros 30 dias.</li>
-                    </ul>`;
-            } else if (percent < 75) {
-                // Nível Intermediário
-                scoreDisplay.style.borderColor = "#f59e0b";
-                titleDisplay.innerText = "Em Desenvolvimento";
-                nameDisplay.innerText = "Plano Recomendado: Crescenza 180° (Consistência)";
-                contentDisplay.innerHTML = `
-                    <p>Existem boas práticas, mas elas são vistas como "eventos isolados" e não como cultura. O desafio é a rotina.</p>
-                    <ul style="color:#cbd5e1; padding-left:20px; line-height:1.8;">
-                        <li><strong>Diagnóstico:</strong> Ações acontecem, mas sem calendário fixo ou medição de impacto.</li>
-                        <li><strong>O que fazer:</strong> Calendário Anual de Endomarketing e Pesquisas de Clima regulares.</li>
-                        <li><strong>Meta:</strong> Transformar ações esporádicas em rituais de cultura previsíveis.</li>
-                    </ul>`;
-            } else {
-                // Nível Avançado
-                scoreDisplay.style.borderColor = "#10b981";
-                titleDisplay.innerText = "Excelência Cultural";
-                nameDisplay.innerText = "Plano Recomendado: Crescenza 360° (Expansão)";
-                contentDisplay.innerHTML = `
-                    <p>Sua cultura é forte. O desafio agora é inovação e Employer Branding (marca empregadora) para atrair os melhores.</p>
-                    <ul style="color:#cbd5e1; padding-left:20px; line-height:1.8;">
-                        <li><strong>Diagnóstico:</strong> Equipe engajada, exige desafios maiores.</li>
-                        <li><strong>O que fazer:</strong> Universidade Corporativa, Trilhas de Carreira e Programa de Embaixadores.</li>
-                        <li><strong>Meta:</strong> Transformar colaboradores em defensores da marca e referências no mercado.</li>
-                    </ul>`;
+            // Função de Login
+            function tryLogin() {
+                // Remove espaços e converte para maiúsculo para evitar erros de digitação
+                const userPass = inputPass.value.trim().toUpperCase();
+                
+                if(userPass === CORRECT_PASS) {
+                    modal.style.opacity = '0';
+                    setTimeout(() => {
+                        modal.style.display = 'none';
+                        content.style.display = 'block';
+                    }, 300);
+                } else {
+                    errorMsg.style.display = 'block';
+                    inputPass.value = '';
+                    inputPass.focus();
+                }
             }
 
-            document.getElementById('result-area').scrollIntoView({ behavior: 'smooth' });
-        }
+            // Event Listeners para Login
+            btnLogin.addEventListener('click', tryLogin);
+            inputPass.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') tryLogin();
+            });
+
+            // --- LÓGICA DE CÁLCULO (DIAGNÓSTICO) ---
+            const inputs = document.querySelectorAll('.score-input');
+            const displays = document.querySelectorAll('.score-val');
+            const btnCalc = document.getElementById('btn-calc');
+
+            // Atualiza número ao mover slider
+            inputs.forEach((input, idx) => {
+                input.addEventListener('input', () => {
+                    displays[idx].innerText = input.value;
+                });
+            });
+
+            // Calcula Resultado Final
+            btnCalc.addEventListener('click', () => {
+                let total = 0;
+                inputs.forEach(inp => total += parseInt(inp.value));
+                
+                // Cálculo: (Total / 60 pontos possíveis) * 100
+                const percent = Math.round((total / 60) * 100);
+                
+                const resultSec = document.getElementById('result-section');
+                const scoreDisplay = document.getElementById('final-score');
+                const titleDisplay = document.getElementById('result-title');
+                const descDisplay = document.getElementById('result-desc');
+
+                // Mostra a seção
+                resultSec.style.display = 'block';
+                scoreDisplay.innerText = percent + "%";
+
+                // Lógica de Negócio (Baseada no PDF Crescenza)
+                if(percent < 40) {
+                    // NÍVEL BÁSICO -> PLANO 90°
+                    titleDisplay.innerText = "Estágio Inicial: Risco de Turnover";
+                    descDisplay.innerHTML = `
+                        <strong>Diagnóstico:</strong> Sua empresa possui processos frágeis e baixo salário emocional. O foco é apagar incêndios. <br><br>
+                        [cite_start]<strong>Ação Imediata (Plano Crescenza 90°):</strong> [cite: 42, 135]
+                        <ul>
+                            <li>Implementar canais básicos oficiais (mural/informativo) para reduzir ruído.</li>
+                            <li>Estruturar um Onboarding básico (recepção + manual) para novos talentos.</li>
+                            <li>Iniciar campanhas de saúde simples (ex: Janeiro Branco) para mostrar cuidado.</li>
+                        </ul>
+                    `;
+                } else if (percent < 75) {
+                    // NÍVEL TÁTICO -> PLANO 180°
+                    titleDisplay.innerText = "Estágio em Desenvolvimento";
+                    descDisplay.innerHTML = `
+                        <strong>Diagnóstico:</strong> Existem boas práticas, mas falta consistência. Os colaboradores veem as ações como eventos isolados, não como cultura. <br><br>
+                        [cite_start]<strong>Ação Tática (Plano Crescenza 180°):</strong> [cite: 42, 137]
+                        <ul>
+                            <li>Criar um Calendário Anual de Endomarketing para garantir constância.</li>
+                            <li>Implementar Pesquisas de Clima periódicas e devolver feedback.</li>
+                            <li>Estruturar programa de padrinhos/mentores na integração.</li>
+                        </ul>
+                    `;
+                } else {
+                    // NÍVEL ESTRATÉGICO -> PLANO 360°
+                    titleDisplay.innerText = "Estágio de Excelência Cultural";
+                    descDisplay.innerHTML = `
+                        <strong>Diagnóstico:</strong> O endomarketing já é estratégico. O desafio agora é manter a inovação e o engajamento em alta performance. <br><br>
+                        [cite_start]<strong>Ação de Expansão (Plano Crescenza 360°):</strong> [cite: 42, 140]
+                        <ul>
+                            <li>Focar em T&D (Universidade Corporativa e Trilhas de Carreira).</li>
+                            <li>Programas de Embaixadores da Marca.</li>
+                            <li>Gamificação de metas atrelada a reconhecimento (Campanhas de Incentivo).</li>
+                        </ul>
+                    `;
+                }
+
+                // Scroll suave até o resultado
+                resultSec.scrollIntoView({ behavior: 'smooth' });
+            });
+
+        });
     </script>
 </body>
 </html>
